@@ -17,9 +17,11 @@ class UserController {
         if(!email || !password || !familia || !imya || !otchestvo || !gorod || !sharaga || !kurs || !birth || !telefon) {
             return next (ApiError.badRequest('Не все данные введены'))
         }
-        const candidate = await User.findOne({where: {email, telefon}})
-        if (candidate) {
-            return next(ApiError.badRequest('Пользователь с таким e-mail или номером уже существует'))
+        const candidateByEmail = await User.findOne({ where: { email } });
+        const candidateByTelefon = await User.findOne({ where: { telefon } });
+
+        if (candidateByEmail || candidateByTelefon) {
+            return next(ApiError.badRequest('Пользователь с таким e-mail или номером уже существует'));
         }
         const hashPassword = await bcrypt.hash(password,5)
         const user = await User.create({email, role, familia, imya, otchestvo, gorod, sharaga, kurs, birth, telefon, password: hashPassword})
