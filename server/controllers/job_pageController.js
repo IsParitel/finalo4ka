@@ -40,7 +40,7 @@ class Job_pageController {
                 otraslId,
                 specialId,
                 img: filename,
-                description, 
+                description,
             });
 
             return res.json(job_page);
