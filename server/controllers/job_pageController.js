@@ -1,12 +1,12 @@
 const uuid = require('uuid');
 const path = require('path');
-const { Job_page, Job_info, Profile_page, Job_reg, Special } = require('../models/models');
+const { Job_page, Profile_page, Special } = require('../models/models');
 const ApiError = require('../error/ApiError');
 
 class Job_pageController {
     async create(req, res, next) {
         try {
-            const { name, otraslId, specialId, info } = req.body;
+            const { name, otraslId, specialId, description } = req.body;
 
             if (!req.files || !req.files.img) {
                 return next(ApiError.badRequest('Файл изображения не передан'));
@@ -35,14 +35,13 @@ class Job_pageController {
                 return next(ApiError.badRequest('Профиль пользователя не найден'));
             }
 
-            const job_page = await Job_page.create({ name, otraslId, specialId, img: filename });
-
-            if (info) {
-                await Job_info.create({
-                    description: info,
-                    jobPageId: job_page.id
-                });
-            }
+            const job_page = await Job_page.create({
+                name,
+                otraslId,
+                specialId,
+                img: filename,
+                description, 
+            });
 
             return res.json(job_page);
         } catch (e) {
@@ -95,7 +94,6 @@ class Job_pageController {
                 return res.status(404).json({ message: 'Вакансия не найдена' });
             }
 
-            await Job_info.destroy({ where: { jobPageId: id } });
             await job_page.destroy();
 
             return res.json({ message: 'Вакансия успешно удалена' });
