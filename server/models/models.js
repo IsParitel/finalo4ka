@@ -29,6 +29,7 @@ const Job_page = sequelize.define('job_page', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     img: {type: DataTypes.STRING, allowNull: false},
+    description: {type: DataTypes.STRING},
 })
 
 const Otrasl = sequelize.define('otrasl', {
@@ -41,15 +42,6 @@ const Special = sequelize.define('special', {
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
 })
 
-const Job_info = sequelize.define('job_info', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    title: {type: DataTypes.STRING, allowNull: false},
-    descripton: {type: DataTypes.STRING, allowNull: false},
-})
-
-const Otraslspecial = sequelize.define('otraslspecial', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-})
 
 User.hasOne(Profile_page)
 Profile_page.belongsTo(User)
@@ -66,11 +58,9 @@ Job_page.belongsTo(Special)
 Job_page.hasMany(Job_reg, {foreignKey: 'job_pageId'})
 Job_reg.belongsTo(Job_page, {foreignKey: 'job_pageId'})
 
-Job_page.hasMany(Job_info, {as: 'info'});
-Job_info.belongsTo(Job_page)
-
-Otrasl.belongsToMany(Special, {through: Otraslspecial})
+Otrasl.hasMany(Special)
+Special.belongsTo(Otrasl)
 
 module.exports = {
-    User, Profile_page, Job_reg, Job_page, Otrasl, Special, Job_info, Otraslspecial
+    User, Profile_page, Job_reg, Job_page, Otrasl, Special
 }

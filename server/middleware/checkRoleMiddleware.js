@@ -8,7 +8,6 @@ module.exports = function (...allowedRoles) {
         try {
             const authHeader = req.headers.authorization;
 
-            // Проверяем, что заголовок существует и корректен
             if (!authHeader) {
                 return res.status(401).json({ message: 'Пользователь не авторизован (заголовок отсутствует)' });
             }
@@ -21,15 +20,14 @@ module.exports = function (...allowedRoles) {
             // Проверяем токен
             const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-            // Проверяем, есть ли у пользователя одна из допустимых ролей
             if (!allowedRoles.includes(decoded.role)) {
                 return res.status(403).json({ message: 'Нет доступа для вашей роли' });
             }
 
-            req.user = decoded; // Добавляем данные пользователя в `req`
-            next(); // Передаём управление дальше
+            req.user = decoded;
+            next();
         } catch (error) {
-            console.error('Ошибка проверки роли:', error.message); // Логирование
+            console.error('Ошибка проверки роли:', error.message);
             res.status(401).json({ message: 'Пользователь не авторизован' });
         }
     };

@@ -11,7 +11,7 @@ router.use('/user', userRouter);
 router.use('/otrasl', otraslRouter);
 router.use('/special', specialRouter);
 router.use('/job_page', job_pageRouter);
-router.use('./profile_page', profile_pageRouter);
-router.use('./job_reg', job_reg);
+router.use('/profile_page', profile_pageRouter);
+router.use('/job_reg', job_reg);
 
 module.exports = router

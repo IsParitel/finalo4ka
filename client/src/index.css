@@ -1,0 +1,260 @@
+/* Глобальные стили */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color, #ffffff); /* Цвет фона */
+    color: var(--text-color, #000000); /* Цвет текста */
+    min-height: 100vh; /* Обеспечиваем, чтобы фон покрывал всю высоту страницы */
+}
+
+/* Тема светлая */
+.theme-light {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --card-bg: #f8f9fa;
+    --button-bg: #007bff;
+    --button-text: #ffffff;
+}
+
+/* Тема темная */
+.theme-dark {
+    --bg-color: #121212;
+    --text-color: #f5f5f5;
+    --card-bg: #1e1e1e;
+    --button-bg: #37474f;
+    --button-text: #ffffff;
+}
+
+/* Применение переменных */
+body {
+    background-color: var(--bg-color) !important; /* !important чтобы переопределить другие стили */
+    color: var(--text-color);
+}
+
+.card {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Общие стили для модального окна */
+.modal-content {
+    border-radius: 10px; /* Радиус скругления */
+    transition: background-color 0.3s, color 0.3s; /* Плавный переход при смене темы */
+}
+
+/* Стили для светлой темы */
+.theme-light .modal-content {
+    background-color: #ffffff; /* Светлый фон */
+    color: #000000; /* Черный текст */
+}
+
+.theme-light .modal-header {
+    background-color: #f8f9fa; /* Светлый заголовок */
+    color: #000000; /* Черный текст в заголовке */
+    border-bottom: 1px solid #ddd;
+}
+
+.theme-light .modal-footer {
+    background-color: #f8f9fa; /* Светлый футер */
+    border-top: 1px solid #ddd;
+}
+
+.theme-light .btn-primary {
+    background-color: #007bff; /* Светлая кнопка */
+    border-color: #007bff;
+}
+
+/* Стили для темной темы */
+.theme-dark .modal-content {
+    background-color: #333333; /* Темный фон */
+    color: #f5f5f5; /* Светлый текст */
+}
+
+.theme-dark .modal-header {
+    background-color: #444444; /* Темный заголовок */
+    color: #f5f5f5; /* Светлый текст в заголовке */
+    border-bottom: 1px solid #555;
+}
+
+.theme-dark .modal-footer {
+    background-color: #444444; /* Темный футер */
+    border-top: 1px solid #555;
+}
+
+.theme-dark .btn-primary {
+    background-color: #37474f; /* Темная кнопка */
+    border-color: #37474f;
+}
+
+/* Стили для светлой темы */
+.theme-light .form-control {
+    background-color: #f5f5f5; /* Светло-серый фон для полей ввода */
+    color: #000000; /* Черный текст */
+    border: 1px solid #ccc; /* Светлый бордер */
+}
+
+.theme-light .form-control:focus {
+    background-color: #ffffff; /* Белый фон при фокусе */
+    border-color: #007bff; /* Синий бордер при фокусе */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Тень при фокусе */
+}
+
+.theme-light .btn-file {
+    background-color: #e0e0e0; /* Светло-серый фон для кнопки загрузки */
+    color: #333333;
+    border-color: #ccc;
+}
+
+.theme-light .btn-file:hover {
+    background-color: #d0d0d0;
+}
+
+/* Стили для темной темы */
+.theme-dark .form-control {
+    background-color: #444444; /* Темно-серый фон для полей ввода */
+    color: #f5f5f5; /* Светлый текст */
+    border: 1px solid #555; /* Темный бордер */
+}
+
+.theme-dark .form-control:focus {
+    background-color: #555555; /* Немного светлее при фокусе */
+    border-color: #007bff; /* Синий бордер при фокусе */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Тень при фокусе */
+}
+
+.theme-dark .btn-file {
+    background-color: #555555; /* Темно-серый фон для кнопки загрузки */
+    color: #f5f5f5;
+    border-color: #666;
+}
+
+.theme-dark .btn-file:hover {
+    background-color: #666666;
+}
+
+/* Стили для светлой темы */
+.theme-light .list-group {
+    background-color: #ffffff; /* Белый фон для списка */
+    color: #000000; /* Черный текст */
+    border-radius: 8px; /* Скругленные углы */
+    border: 1px solid #ddd; /* Светлый бордер */
+}
+
+.theme-light .list-group-item {
+    background-color: #ffffff; /* Белый фон для элементов списка */
+    color: #000000; /* Черный текст */
+    border: 1px solid #ddd; /* Светлый бордер */
+}
+
+.theme-light .list-group-item:hover {
+    background-color: #f1f1f1; /* Слегка серый фон при наведении */
+}
+
+.theme-light .list-group-item.active {
+    background-color: #007bff; /* Синий фон для активного элемента */
+    color: #ffffff; /* Белый текст для активного элемента */
+    border-color: #007bff; /* Синий бордер для активного элемента */
+}
+
+/* Стили для темной темы */
+.theme-dark .list-group {
+    background-color: #333333; /* Темный фон для списка */
+    color: #f5f5f5; /* Светлый текст */
+    border-radius: 8px;
+    border: 1px solid #555;
+}
+
+.theme-dark .list-group-item {
+    background-color: #444444; /* Темный фон для элементов списка */
+    color: #f5f5f5; /* Светлый текст */
+    border: 1px solid #555;
+}
+
+.theme-dark .list-group-item:hover {
+    background-color: #555555; /* Темно-серый фон при наведении */
+}
+
+.theme-dark .list-group-item.active {
+    background-color: #007bff; /* Синий фон для активного элемента */
+    color: #ffffff; /* Белый текст для активного элемента */
+    border-color: #007bff; /* Синий бордер для активного элемента */
+}
+
+/* Для скрытия полосы фильтров */
+.filter-bar {
+    display: none; /* Скрыть всю полосу фильтров */
+}
+
+/* Или, если хотите сделать ее менее заметной */
+.theme-dark .filter-bar {
+    background-color: #444444; /* Темный оттенок для полосы в темной теме */
+    opacity: 0.7; /* Сделать полосу полупрозрачной */
+}
+
+/* Для светлой темы */
+.theme-light .dropdown-menu {
+    background-color: #fff; /* Белый фон */
+    color: #000; /* Черный текст */
+    border: 1px solid #ccc; /* Легкая граница */
+}
+
+.theme-light .dropdown-item {
+    color: #000; /* Черный текст для элементов */
+}
+
+.theme-light .dropdown-item:hover {
+    background-color: #f8f9fa; /* Светлый фон при наведении */
+    color: #007bff; /* Синий текст при наведении */
+}
+
+/* Для темной темы */
+.theme-dark .dropdown-menu {
+    background-color: #333; /* Темный фон */
+    color: #fff; /* Белый текст */
+    border: 1px solid #444; /* Темная граница */
+}
+
+.theme-dark .dropdown-item {
+    color: #fff; /* Белый текст для элементов */
+}
+
+.theme-dark .dropdown-item:hover {
+    background-color: #444; /* Темный фон при наведении */
+    color: #dc3545; /* Красный текст при наведении */
+}
+
+/* custom-pagination.css */
+.pagination {
+    background-color: #343a40; /* Темный фон */
+    border-radius: 5px;
+}
+
+.pagination .page-link {
+    color: #f8f9fa; /* Светлый текст */
+    background-color: #343a40; /* Темный фон для ссылок */
+    border: 1px solid #495057; /* Граница */
+    transition: all 0.3s ease; /* Анимация при наведении */
+}
+
+.pagination .page-link:hover {
+    color: #ffffff; /* Белый текст при наведении */
+    background-color: #495057; /* Светлее фон при наведении */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff; /* Синий фон для активного элемента */
+    border-color: #007bff;
+    color: #fff;
+}
