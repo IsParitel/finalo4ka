@@ -24,6 +24,7 @@ const JobPageItem = ({ job_page }) => {
                 height: '200px',
                 overflow: 'hidden',
                 position: 'relative',
+                background: 'rgba(255,255,255,0.2)',
             }}
         >
             {/* Левая часть: Изображение */}
@@ -62,7 +63,7 @@ const JobPageItem = ({ job_page }) => {
             >
                 <div
                     style={{
-                        color: '#343a40',
+                        color: 'rgba(0,0,0,0.65)',
                         fontWeight: 'bold',
                         fontSize: '20px',
                         marginBottom: '10px',
@@ -83,7 +84,7 @@ const JobPageItem = ({ job_page }) => {
                     right: '0',
                     width: '50%',
                     height: '100%',
-                    background: 'rgba(255, 255, 255, 0.2)',
+                    background: 'rgba(255,255,255,0.28)',
                     borderRadius: '15px',
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                     display: 'flex',
@@ -96,7 +97,7 @@ const JobPageItem = ({ job_page }) => {
                 <div
                     style={{
                         fontSize: '14px',
-                        color: '#343a40',
+                        color: 'rgba(0,0,0,0.65)',
                         textAlign: 'center',
                     }}
                 >

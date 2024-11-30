@@ -10,7 +10,7 @@ body {
 /* Тема светлая */
 .theme-light {
     --bg-color: #ffffff;
-    --text-color: #000000;
+    --text-color: #ffffff;
     --card-bg: #f8f9fa;
     --button-bg: #007bff;
     --button-text: #ffffff;
