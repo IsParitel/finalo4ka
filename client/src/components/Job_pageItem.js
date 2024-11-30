@@ -14,25 +14,25 @@ const JobPageItem = ({ job_page }) => {
         : 'https://via.placeholder.com/150';
 
     const splitTextByWords = (text, maxLength) => {
-        if (!text) return ''; // Если текста нет, возвращаем пустую строку
-        const words = text.split(' '); // Разделяем текст на слова
+        if (!text) return '';
+        const words = text.split(' ');
         const lines = [];
         let currentLine = '';
 
         words.forEach((word) => {
             if ((currentLine + word).length <= maxLength) {
-                currentLine += (currentLine ? ' ' : '') + word; // Добавляем слово к текущей строке
+                currentLine += (currentLine ? ' ' : '') + word;
             } else {
-                lines.push(currentLine); // Если строка заполнена, добавляем её в массив
-                currentLine = word; // Начинаем новую строку с текущего слова
+                lines.push(currentLine);
+                currentLine = word;
             }
         });
 
         if (currentLine) {
-            lines.push(currentLine); // Добавляем последнюю строку
+            lines.push(currentLine);
         }
 
-        return lines.join('\n'); // Возвращаем строки с переносами
+        return lines.join('\n');
     };
 
     return (
@@ -105,7 +105,7 @@ const JobPageItem = ({ job_page }) => {
                 </div>
             </div>
 
-            {/* Вторая карточка (невидимая, в правой части первой, увеличенная и с прозрачными краями) */}
+            {/* Вторая карточка */}
             <Card
                 style={{
                     position: 'absolute',

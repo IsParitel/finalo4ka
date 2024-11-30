@@ -4,33 +4,31 @@ import { createSpecial, fetchOtrasls } from "../../http/job_pageAPI";
 
 const CreateSpecial = ({ show, onHide }) => {
     const [value, setValue] = useState('');
-    const [selectedOtrasl, setSelectedOtrasl] = useState(null); // Состояние для выбранной отрасли
-    const [otrasls, setOtrasls] = useState([]); // Состояние для списка отраслей
+    const [selectedOtrasl, setSelectedOtrasl] = useState(null);
+    const [otrasls, setOtrasls] = useState([]);
 
-    // Загружаем список отраслей при монтировании компонента
     useEffect(() => {
         fetchOtrasls().then(data => {
             setOtrasls(data);
         });
     }, []);
 
-    // Функция для обработки выбора отрасли
     const handleSelect = (eventKey) => {
         const selected = otrasls.find((otrasl) => otrasl.id === parseInt(eventKey));
-        setSelectedOtrasl(selected); // Устанавливаем выбранную отрасль
+        setSelectedOtrasl(selected);
     };
 
     const addSpecial = () => {
         if (selectedOtrasl && value) {
             const special = {
                 name: value,
-                otraslId: selectedOtrasl.id // передаем id выбранной отрасли
+                otraslId: selectedOtrasl.id
             };
 
             createSpecial(special).then(data => {
-                setValue(''); // Очищаем поле ввода
-                setSelectedOtrasl(null); // Сбрасываем выбранную отрасль
-                onHide(); // Закрываем модальное окно
+                setValue('');
+                setSelectedOtrasl(null);
+                onHide(); 
             });
         } else {
             alert('Пожалуйста, выберите отрасль и укажите название специальности.');

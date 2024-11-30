@@ -1,43 +1,67 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import { Container, Card, Form, Button, Row, Col } from "react-bootstrap";
-import {NavLink, useLocation, useNavigate} from "react-router-dom";
-import {LOGIN_ROUTE, MAIN_PAGE_ROUTE, REGISTER_ROUTE} from "../utils/consts";
-import {login, registration} from "../http/userAPI";
-import {observer} from "mobx-react";
-import {Context} from "../index";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { LOGIN_ROUTE, MAIN_PAGE_ROUTE, REGISTER_ROUTE } from "../utils/consts";
+import { login, registration } from "../http/userAPI";
+import { observer } from "mobx-react";
+import { Context } from "../index";
 
 const Auth = observer(() => {
-    const {user} = useContext(Context)
+    const { user } = useContext(Context);
     const location = useLocation();
     const navigate = useNavigate();
     const isLogin = location.pathname === LOGIN_ROUTE;
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [imya, setImya] = useState('')
-    const [familia, setFamilia] = useState('')
-    const [otchestvo, setOtchestvo] = useState('')
-    const [gorod, setGorod] = useState('')
-    const [sharaga, setSharaga] = useState('')
-    const [kurs, setKurs] = useState('')
-    const [birth, setBirth] = useState('')
-    const [telefon, setTelefon] = useState('')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [imya, setImya] = useState('');
+    const [familia, setFamilia] = useState('');
+    const [otchestvo, setOtchestvo] = useState('');
+    const [gorod, setGorod] = useState('');
+    const [sharaga, setSharaga] = useState('');
+    const [kurs, setKurs] = useState('');
+    const [birth, setBirth] = useState('');
+    const [telefon, setTelefon] = useState('');
+
+    const handlePhoneFocus = () => {
+        if (!telefon.startsWith('+')) {
+            setTelefon('+');
+        }
+    };
+
+    const handlePhoneChange = (value) => {
+        const sanitizedValue = value.replace(/[^0-9]/g, '');
+        setTelefon(prev => (prev.startsWith('+') ? `+${sanitizedValue}` : sanitizedValue));
+    };
 
     const click = async () => {
         try {
             let data;
-            if(isLogin) {
-                data = await login(email, password)
+            const cleanedPhone = telefon.replace(/\s/g, '');
+
+            if (isLogin) {
+                data = await login(email, password);
             } else {
-                data = await registration(email, password, imya, familia,otchestvo, gorod, sharaga, kurs, birth, telefon)
+                data = await registration(
+                    email,
+                    password,
+                    imya,
+                    familia,
+                    otchestvo,
+                    gorod,
+                    sharaga,
+                    kurs,
+                    birth,
+                    cleanedPhone
+                );
             }
-            console.log(data)
-            user.setUser(user)
-            user.setIsAuth(true)
-            navigate(MAIN_PAGE_ROUTE)
+            console.log(data);
+            user.setUser(user);
+            user.setIsAuth(true);
+            navigate(MAIN_PAGE_ROUTE);
         } catch (e) {
-            alert(e.response.data.message)
+            alert(e.response.data.message);
         }
-    }
+    };
 
     return (
         <Container
@@ -109,9 +133,13 @@ const Auth = observer(() => {
                             <Col md={6}>
                                 <Form.Control
                                     placeholder="Введите телефон"
+                                    type="tel"
                                     className="mb-3"
                                     value={telefon}
-                                    onChange={e => setTelefon(e.target.value)}
+                                    onFocus={handlePhoneFocus}
+                                    onChange={e => handlePhoneChange(e.target.value)}
+                                    maxLength="12"
+                                    required
                                 />
                             </Col>
                         </Row>

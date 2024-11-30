@@ -14,7 +14,7 @@ const User = sequelize.define('user', {
     sharaga: {type: DataTypes.STRING},
     kurs: {type: DataTypes.INTEGER},
     birth: {type: DataTypes.DATE},
-    telefon: {type: DataTypes.STRING, unique: true},
+    telefon: {type: DataTypes.NUMBER, unique: true},
 })
 
 const Profile_page = sequelize.define('profile_page', {
