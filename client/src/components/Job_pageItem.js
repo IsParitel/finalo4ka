@@ -1,4 +1,4 @@
-import { Image, Card} from "react-bootstrap";
+import { Image, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { JOB_PAGE_ROUTE } from "../utils/consts";
 
@@ -9,7 +9,31 @@ const JobPageItem = ({ job_page }) => {
         return <div>Вакансия не найдена</div>;
     }
 
-    const imageUrl = job_page.img ? process.env.REACT_APP_API_URL + job_page.img : 'https://via.placeholder.com/150';
+    const imageUrl = job_page.img
+        ? process.env.REACT_APP_API_URL + job_page.img
+        : 'https://via.placeholder.com/150';
+
+    const splitTextByWords = (text, maxLength) => {
+        if (!text) return ''; // Если текста нет, возвращаем пустую строку
+        const words = text.split(' '); // Разделяем текст на слова
+        const lines = [];
+        let currentLine = '';
+
+        words.forEach((word) => {
+            if ((currentLine + word).length <= maxLength) {
+                currentLine += (currentLine ? ' ' : '') + word; // Добавляем слово к текущей строке
+            } else {
+                lines.push(currentLine); // Если строка заполнена, добавляем её в массив
+                currentLine = word; // Начинаем новую строку с текущего слова
+            }
+        });
+
+        if (currentLine) {
+            lines.push(currentLine); // Добавляем последнюю строку
+        }
+
+        return lines.join('\n'); // Возвращаем строки с переносами
+    };
 
     return (
         <Card
@@ -21,7 +45,7 @@ const JobPageItem = ({ job_page }) => {
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                 borderRadius: '15px',
                 display: 'flex',
-                height: '200px',
+                height: '300px',
                 overflow: 'hidden',
                 position: 'relative',
                 background: 'rgba(255,255,255,0.2)',
@@ -38,6 +62,8 @@ const JobPageItem = ({ job_page }) => {
                     alignItems: 'center',
                     border: '2px solid #6c757d',
                     borderRadius: '10px',
+                    overflow: 'hidden',
+                    backgroundColor: '#f8f9fa',
                 }}
             >
                 <Image
@@ -59,6 +85,7 @@ const JobPageItem = ({ job_page }) => {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     padding: '15px',
+                    overflow: 'hidden',
                 }}
             >
                 <div
@@ -68,11 +95,13 @@ const JobPageItem = ({ job_page }) => {
                         fontSize: '20px',
                         marginBottom: '10px',
                         textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
+                        whiteSpace: 'pre-wrap',
                         overflow: 'hidden',
+                        overflowWrap: 'break-word',
                     }}
+                    title={job_page?.name}
                 >
-                    {job_page?.name}
+                    {splitTextByWords(job_page?.name, 32)}
                 </div>
             </div>
 
@@ -109,3 +138,4 @@ const JobPageItem = ({ job_page }) => {
 };
 
 export default JobPageItem;
+
