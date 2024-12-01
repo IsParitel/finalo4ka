@@ -9,7 +9,7 @@ body {
 
 /* Тема светлая */
 .theme-light {
-    --bg-color: #ffffff;
+    --bg-color: #F3F3F3;
     --text-color: rgb(0, 0, 0);
     --card-bg: #f8f9fa;
     --button-bg: #007bff;
@@ -257,4 +257,58 @@ button:hover {
     background-color: #007bff; /* Синий фон для активного элемента */
     border-color: #007bff;
     color: #fff;
+}
+
+
+/* Светлая тема */
+.theme-light .navbar {
+    background-color: #f8f9fa; /* Светлый фон */
+    color: #000; /* Темный текст */
+    border-bottom: 1px solid #ddd; /* Легкая граница снизу */
+}
+
+.theme-light .navbar a {
+    color: #007bff; /* Синий текст ссылок */
+    text-decoration: none;
+}
+
+.theme-light .navbar a:hover {
+    color: #0056b3; /* Темно-синий текст при наведении */
+}
+
+/* Темная тема */
+.theme-dark .navbar {
+    background-color: #333333; /* Темный фон */
+    color: #f5f5f5; /* Светлый текст */
+    border-bottom: 1px solid #444; /* Темная граница снизу */
+}
+
+.theme-dark .navbar a {
+    color: #80bdff; /* Светло-синий текст ссылок */
+    text-decoration: none;
+}
+
+.theme-dark .navbar a:hover {
+    color: #339af0; /* Более насыщенный синий текст при наведении */
+}
+
+/* Кнопки внутри Navbar */
+.theme-light .navbar .btn {
+    background-color: #007bff; /* Синий фон кнопки */
+    color: #fff; /* Белый текст */
+    border: none;
+}
+
+.theme-light .navbar .btn:hover {
+    background-color: #0056b3; /* Темно-синий фон при наведении */
+}
+
+.theme-dark .navbar .btn {
+    background-color: #37474f; /* Темный фон кнопки */
+    color: #fff; /* Белый текст */
+    border: none;
+}
+
+.theme-dark .navbar .btn:hover {
+    background-color: #455a64; /* Светло-серый фон при наведении */
 }

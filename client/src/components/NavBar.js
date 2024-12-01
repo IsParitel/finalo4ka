@@ -28,78 +28,76 @@ const NavBar = observer(() => {
     const isAdmin = user.role === "ADMIN";
 
     return (
-        <Navbar expand="lg" className="bg-dark navbar-dark">
-            <Container fluid>
-                <NavLink
-                    style={{color: "white", textDecoration: "none", fontSize: "1.5rem", fontWeight: "bold"}}
-                    to={MAIN_PAGE_ROUTE}
-                >
-                    <img
-                        src={skill}
-                        alt="Overlay"
-                        style={{
-                            position: "absolute",
-                            top: "300",
-                            left: "-2%",
-                            transform: "translate(30%, -50%)",
-                            zIndex: "1",
-                            opacity: "1", // Прозрачность (опционально)
-                            width: "200px", // Ширина изображения (настройте по необходимости)
-                            height: "auto"
-                        }}
-                    />
-                </NavLink>
-                <Navbar.Toggle aria-controls="navbar-nav"/>
-                <Navbar.Collapse id="navbar-nav">
-                    <Nav className="ms-auto d-flex align-items-center" style={{gap: "10px"}}>
-
-                        {/* Кнопки для всех пользователей */}
-
-
-
-
-                        {!user.isAuth && (
-                            <>
-                                <Button variant="outline-light" onClick={() => navigate(LOGIN_ROUTE)}>
-                                    Авторизация
-                                </Button>
-                            </>
-                        )}
-
-
-                        {/* Кнопки, доступные только авторизованным */}
-                        {isAdmin && (
-                            <Button variant="outline-light" onClick={() => navigate(ADMIN_ROUTE)}>
-                                Админ панель
-                            </Button>
-                        )}
-                        {canAddJob && (
-                            <Button variant="outline-light" onClick={() => navigate(ADD_JOB_ROUTE)}>
-                                Добавить вакансию
-                            </Button>
-                        )}
-                        {user.isAuth && (
-                            <>
-                                <Button variant="outline-light" onClick={() => navigate(PROFILE_ROUTE)}>
-                                    Профиль
-                                </Button>
-                                <Button variant="outline-light" onClick={logOut}>
-                                    Выйти
-                                </Button>
-                            </>
-                        )}
-                        {/* Кнопка для смены темы */}
-                        <Button
-                            variant="outline-light"
-                            onClick={toggleTheme}
-                            style={{ marginLeft: "10px", transform: "translate(-7%, 0%)" }}
-                        >
-                            {theme === "theme-light" ? "Тёмная тема" : "Светлая тема"}
+<Navbar
+    expand="lg"
+    className={`navbar ${theme === "theme-light" ? "navbar-light" : "navbar-dark"}`}
+>
+    <Container fluid>
+        <NavLink
+            style={{
+                color: "inherit", // Используем текущий цвет текста темы
+                textDecoration: "none",
+                fontSize: "1.5rem",
+                fontWeight: "bold"
+            }}
+            to={MAIN_PAGE_ROUTE}
+        >
+            <img
+                src={skill}
+                alt="Overlay"
+                style={{
+                    position: "absolute",
+                    top: "300",
+                    left: "-2%",
+                    transform: "translate(30%, -50%)",
+                    zIndex: "1",
+                    opacity: "1",
+                    width: "200px",
+                    height: "auto"
+                }}
+            />
+        </NavLink>
+        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Collapse id="navbar-nav">
+            <Nav className="ms-auto d-flex align-items-center" style={{ gap: "10px" }}>
+                {/* Навигационные кнопки */}
+                {!user.isAuth && (
+                    <Button variant="outline-light" onClick={() => navigate(LOGIN_ROUTE)}>
+                        Авторизация
+                    </Button>
+                )}
+                {isAdmin && (
+                    <Button variant="outline-light" onClick={() => navigate(ADMIN_ROUTE)}>
+                        Админ панель
+                    </Button>
+                )}
+                {canAddJob && (
+                    <Button variant="outline-light" onClick={() => navigate(ADD_JOB_ROUTE)}>
+                        Добавить вакансию
+                    </Button>
+                )}
+                {user.isAuth && (
+                    <>
+                        <Button variant="outline-light" onClick={() => navigate(PROFILE_ROUTE)}>
+                            Профиль
                         </Button>
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+                        <Button variant="outline-light" onClick={logOut}>
+                            Выйти
+                        </Button>
+                    </>
+                )}
+                {/* Кнопка для смены темы */}
+                <Button
+                    variant="outline-light"
+                    onClick={toggleTheme}
+                    style={{ marginLeft: "10px", transform: "translate(-7%, 0%)" }}
+                >
+                    {theme === "theme-light" ? "Тёмная тема" : "Светлая тема"}
+                </Button>
+            </Nav>
+        </Navbar.Collapse>
+    </Container>
+</Navbar>
     );
 });
 
