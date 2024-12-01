@@ -6,3 +6,4 @@ export const JOB_LIST_ROUTE = '/jobs'
 export const JOB_PAGE_ROUTE = '/job'
 export const MAIN_PAGE_ROUTE = '/'
 export const ADD_JOB_ROUTE = "/add_job"
+export const JOB_TEST_ROUTE = "/test"

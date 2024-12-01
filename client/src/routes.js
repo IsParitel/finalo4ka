@@ -37,6 +37,7 @@ export const authRoutes = [
         path: ADD_JOB_ROUTE,
         Component: AddJobPage
     }
+
 ]
 
 export const publicRoutes = [
