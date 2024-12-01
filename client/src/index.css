@@ -18,7 +18,7 @@ body {
 
 /* Тема темная */
 .theme-dark {
-    --bg-color: #121212;
+    --bg-color: #303030;
     --text-color: #f5f5f5;
     --card-bg: #1e1e1e;
     --button-bg: #37474f;
@@ -265,32 +265,12 @@ button:hover {
 .theme-light .navbar {
     background-color: #f8f9fa; /* Светлый фон */
     color: #000; /* Темный текст */
-    border-bottom: 1px solid #ddd; /* Легкая граница снизу */
-}
-
-.theme-light .navbar a {
-    color: #007bff; /* Синий текст ссылок */
-    text-decoration: none;
-}
-
-.theme-light .navbar a:hover {
-    color: #0056b3; /* Темно-синий текст при наведении */
 }
 
 /* Темная тема */
 .theme-dark .navbar {
-    background-color: #333333; /* Темный фон */
+    background-color: #1c1c1c; /* Темный фон */
     color: #f5f5f5; /* Светлый текст */
-    border-bottom: 1px solid #444; /* Темная граница снизу */
-}
-
-.theme-dark .navbar a {
-    color: #80bdff; /* Светло-синий текст ссылок */
-    text-decoration: none;
-}
-
-.theme-dark .navbar a:hover {
-    color: #339af0; /* Более насыщенный синий текст при наведении */
 }
 
 /* Кнопки внутри Navbar */

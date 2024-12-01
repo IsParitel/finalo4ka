@@ -1,11 +1,7 @@
 import React from "react";
 import {Container, Row, Col, Card} from "react-bootstrap";
-import lupa from "../assets/lupa.png";
+import lupa from "../assets/main.png";
 import hat from "../assets/hat.png";
-import V1 from "../assets/V1.png";
-import V2 from "../assets/V2.png";
-import V3 from "../assets/V3.png";
-import V4 from "../assets/V4.png";
 
 const MainPage = () => {
 
@@ -21,117 +17,22 @@ const MainPage = () => {
                 color: "white",
             }}
         >
-            {/* Верхняя часть с приветствием
-            <Row className="text-center mb-4" style={{ position: "relative", top: "-210px" }}>
-                <Col>
-                    <h1 style={{ fontSize: "3rem", fontWeight: "bold", textShadow: "2px 2px 5px rgba(0,0,0,0.7)" }}>
-                        Найди свою стажировку
-                    </h1>
-                    <p style={{ fontSize: "1.2rem", textShadow: "1px 1px 3px rgba(0,0,0,0.6)" }}>
-                        Найдите стажировку своей мечты или добавьте свой профиль прямо сейчас.
-                    </p>
-                </Col>
-            </Row>
-            */}
 
                 <Row className="text-center mb-4" style={{position: "relative", top: "-210px"}}>
                     <Col>
+                        <h1 style={{fontSize: "64px", fontWeight: "bold", color: "#000"}}>
+                            Найди свою стажировку
+                        </h1>
                         <img
                             src={lupa}
                             alt="Overlay"
                             style={{
                                 position: "absolute",
-                                top: "300",
-                                left: "70%",
-                                transform: "translate(-50%, -27%)",
-                                zIndex: "1",
-                                opacity: "1", // Прозрачность (опционально)
+                                transform: "translate(-40%, -43%)",
+                                zIndex: 0,
                                 width: "750px", // Ширина изображения (настройте по необходимости)
-                                height: "auto"
                             }}
                         />
-
-                        <img
-                            src={hat}
-                            alt="Overlay"
-                            style={{
-                                position: "absolute",
-                                top: "300",
-                                left: "70%",
-                                transform: "translate(-70%, -25%)",
-                                zIndex: "1",
-                                opacity: "0.18", // Прозрачность (опционально)
-                                width: "400px", // Ширина изображения (настройте по необходимости)
-                                height: "auto"
-                            }}
-                        />
-
-                        <img
-                            src={V1}
-                            alt="Overlay"
-                            style={{
-                                position: "absolute",
-                                top: "300",
-                                left: "70%",
-                                transform: "translate(-90%, 120%) rotate(320deg)",
-                                zIndex: "1",
-                                opacity: "0.18", // Прозрачность (опционально)
-                                width: "200px", // Ширина изображения (настройте по необходимости)
-                                height: "auto"
-                            }}
-                        />
-
-                        <img
-                            src={V2}
-                            alt="Overlay"
-                            style={{
-                                position: "absolute",
-                                top: "300",
-                                left: "70%",
-                                transform: "translate(-210%, 45%) rotate(17deg)",
-                                zIndex: "1",
-                                opacity: "0.18", // Прозрачность (опционально)
-                                width: "200px", // Ширина изображения (настройте по необходимости)
-                                height: "auto"
-                            }}
-                        />
-
-
-                        <img
-                            src={V3}
-                            alt="Overlay"
-                            style={{
-                                position: "absolute",
-                                top: "300",
-                                left: "70%",
-                                transform: "translate(-200%, -90%)",
-                                zIndex: "1",
-                                opacity: "0.18", // Прозрачность (опционально)
-                                width: "200px", // Ширина изображения (настройте по необходимости)
-                                height: "auto"
-                            }}
-                        />
-
-
-                        <img
-                            src={V4}
-                            alt="Overlay"
-                            style={{
-                                position: "absolute",
-                                top: "300",
-                                left: "70%",
-                                transform: "translate(30%, -50%)",
-                                zIndex: "1",
-                                opacity: "0.18", // Прозрачность (опционально)
-                                width: "200px", // Ширина изображения (настройте по необходимости)
-                                height: "auto"
-                            }}
-                        />
-
-
-                        <h1 style={{fontSize: "3rem", fontWeight: "bold", textShadow: "2px 2px 5px rgba(0,0,0,0.7)"}}>
-                            Найди свою стажировку
-                        </h1>
                     </Col>
                 </Row>
 
