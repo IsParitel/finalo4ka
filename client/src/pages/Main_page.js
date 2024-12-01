@@ -1,18 +1,13 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import {Button, Container, Row, Col, Card} from "react-bootstrap";
-import { Context } from "../index";
+import React from "react";
+import {Container, Row, Col, Card} from "react-bootstrap";
 import lupa from "../assets/lupa.png";
 import hat from "../assets/hat.png";
 import V1 from "../assets/V1.png";
 import V2 from "../assets/V2.png";
 import V3 from "../assets/V3.png";
 import V4 from "../assets/V4.png";
-import { REGISTER_ROUTE, JOB_LIST_ROUTE } from "../utils/consts";
 
 const MainPage = () => {
-    const { user } = useContext(Context);
-    const navigate = useNavigate();
 
     return (
         <Container
@@ -233,34 +228,6 @@ const MainPage = () => {
                 </Card>
 
             </Row>
-
-
-            {/* Кнопка
-            <Row>
-                <Col>
-                    <Button
-                        size="lg"
-                        style={{
-                            transform: "translate(-100%, 300%)",
-                            padding: "15px 30px",
-                            fontSize: "1.2rem",
-                            fontWeight: "bold",
-                            borderRadius: "30px",
-                            background: "rgba(255, 255, 255, 0.8)",
-                            color: "black",
-                            border: "2px solid white",
-                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.4)",
-                                }}
-                                onClick={() =>
-                                    navigate(user.isAuth ? JOB_LIST_ROUTE : REGISTER_ROUTE)
-                                }
-                            >
-                                {user.isAuth ? "Найти СВОю стажироVку" : "Регистрация"}
-                            </Button>
-                        </Col>
-                    </Row>
-            */}
-
         </Container>
 );
 };

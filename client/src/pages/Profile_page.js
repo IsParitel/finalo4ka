@@ -3,13 +3,16 @@ import { Container, Row, Col, Card, Image, Button } from "react-bootstrap";
 import { fetchProfile, deleteJobReg } from "../http/userAPI";
 import { Context } from "../index";
 import { fetchOneJob_page } from "../http/job_pageAPI";
-import blankImage from '../assets/blank.png';
+import blankImage from "../assets/blank.png";
+import { useNavigate } from "react-router-dom";
+import { JOB_LIST_ROUTE } from "../utils/consts";
 
 const ProfilePage = () => {
     const { user } = useContext(Context);
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [jobPages, setJobPages] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchProfile()
@@ -54,7 +57,7 @@ const ProfilePage = () => {
         );
     }
 
-    const { familia, imya} = profile.user;
+    const { familia, imya } = profile.user;
 
     return (
         <Container className="mt-5">
@@ -135,7 +138,32 @@ const ProfilePage = () => {
                             ))}
                         </div>
                     ) : (
-                        <p>У вас пока нет вакансий.</p>
+                        <>
+                            <p style={{ textShadow: "2px 2px 5px rgba(0,0,0,0.7)" }}>
+                                У вас пока нет вакансий.
+                            </p>
+                            <Row>
+                                <Col>
+                                    <Button
+                                        size="lg"
+                                        style={{
+                                            transform: "translate(-100%, 300%)",
+                                            padding: "15px 30px",
+                                            fontSize: "1.2rem",
+                                            fontWeight: "bold",
+                                            borderRadius: "30px",
+                                            background: "rgba(255, 255, 255, 0.8)",
+                                            color: "black",
+                                            border: "2px solid white",
+                                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.4)",
+                                        }}
+                                        onClick={() => navigate(JOB_LIST_ROUTE)} // Исправленный navigate
+                                    >
+                                        Найти СВОю стажироVку
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </>
                     )}
                 </Col>
             </Row>
