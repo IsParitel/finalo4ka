@@ -50,7 +50,7 @@ const MainPage = () => {
                                 left: "70%",
                                 transform: "translate(-50%, -27%)",
                                 zIndex: "1",
-                                opacity: "0.5", // Прозрачность (опционально)
+                                opacity: "1", // Прозрачность (опционально)
                                 width: "750px", // Ширина изображения (настройте по необходимости)
                                 height: "auto"
                             }}
@@ -93,7 +93,7 @@ const MainPage = () => {
                                 position: "absolute",
                                 top: "300",
                                 left: "70%",
-                                transform: "translate(-230%, 60%)",
+                                transform: "translate(-210%, 45%) rotate(17deg)",
                                 zIndex: "1",
                                 opacity: "0.05", // Прозрачность (опционально)
                                 width: "200px", // Ширина изображения (настройте по необходимости)
@@ -137,9 +137,6 @@ const MainPage = () => {
                         <h1 style={{fontSize: "3rem", fontWeight: "bold", textShadow: "2px 2px 5px rgba(0,0,0,0.7)"}}>
                             Найди свою стажировку
                         </h1>
-                        <p style={{fontSize: "1.2rem", textShadow: "1px 1px 3px rgba(0,0,0,0.6)"}}>
-                            Найдите стажировку своей мечты или добавьте свой профиль прямо сейчас.
-                        </p>
                     </Col>
                 </Row>
 
@@ -238,13 +235,13 @@ const MainPage = () => {
             </Row>
 
 
-            {/* Кнопка */}
+            {/* Кнопка
             <Row>
                 <Col>
                     <Button
                         size="lg"
                         style={{
-                            transform: "translate(-0%, 150%)",
+                            transform: "translate(-100%, 300%)",
                             padding: "15px 30px",
                             fontSize: "1.2rem",
                             fontWeight: "bold",
@@ -262,6 +259,8 @@ const MainPage = () => {
                             </Button>
                         </Col>
                     </Row>
+            */}
+
         </Container>
 );
 };
