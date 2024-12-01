@@ -138,35 +138,38 @@ const ProfilePage = () => {
                             ))}
                         </div>
                     ) : (
-                        <>
-                            <p style={{ textShadow: "2px 2px 5px rgba(0,0,0,0.7)" }}>
+                            <p style={{ textShadow: "2px 2px 5px rgba(0,0,0,0.7)", transform: "translate(35%, 100%)", fontSize: "2rem" }}>
                                 У вас пока нет вакансий.
                             </p>
-                            <Row>
-                                <Col>
-                                    <Button
-                                        size="lg"
-                                        style={{
-                                            transform: "translate(-100%, 300%)",
-                                            padding: "15px 30px",
-                                            fontSize: "1.2rem",
-                                            fontWeight: "bold",
-                                            borderRadius: "30px",
-                                            background: "rgba(255, 255, 255, 0.8)",
-                                            color: "black",
-                                            border: "2px solid white",
-                                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.4)",
-                                        }}
-                                        onClick={() => navigate(JOB_LIST_ROUTE)} // Исправленный navigate
-                                    >
-                                        Найти СВОю стажироVку
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </>
-                    )}
+                    )
+
+
+                    }
                 </Col>
             </Row>
+            <Row>
+                <Col>
+                    <Button
+                        size="lg"
+                        style={{
+                            transform: "translate(160%, 100%)",
+                            padding: "15px 30px",
+                            fontSize: "1.2rem",
+                            fontWeight: "bold",
+                            borderRadius: "30px",
+                            background: "rgba(255, 255, 255, 0.8)",
+                            backgroundSize:"couver",
+                            color: "black",
+                            border: "2px solid white",
+                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.4)",
+                        }}
+                        onClick={() => navigate(JOB_LIST_ROUTE)} // Исправленный navigate
+                    >
+                        Найти СВОю стажироVку
+                    </Button>
+                </Col>
+            </Row>
+
         </Container>
     );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Dropdown, Form } from "react-bootstrap";
+import {Button, Card, Dropdown, Form} from "react-bootstrap";
 import { createJob_page, fetchOtrasls, fetchSpecials } from "../http/job_pageAPI";
 import { useNavigate } from "react-router-dom";
 import {MAIN_PAGE_ROUTE} from "../utils/consts"; // Используем useNavigate для перенаправления
@@ -30,7 +30,6 @@ const CreateJobPage = () => {
     const selectFile = (e) => {
         setFile(e.target.files[0]);
     };
-
     // Функция для добавления вакансии
     const addJobPage = () => {
         if (name && selectedOtraslId && selectedSpecialId && description) {
@@ -55,6 +54,16 @@ const CreateJobPage = () => {
     };
 
     return (
+
+        <Card
+            style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '70%',
+                height: '80%'
+            }}>
         <div style={{ padding: '20px' }}>
             <h3>Добавить вакансию</h3>
             <Form>
@@ -110,7 +119,7 @@ const CreateJobPage = () => {
                     <Form.Label>Описание вакансии</Form.Label>
                     <Form.Control
                         as="textarea"
-                        rows={6}
+                        rows={17}
                         placeholder="Введите подробное описание вакансии"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
@@ -122,6 +131,7 @@ const CreateJobPage = () => {
                 Добавить
             </Button>
         </div>
+        </Card>
     );
 };
 
