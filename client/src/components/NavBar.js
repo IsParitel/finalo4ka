@@ -31,29 +31,24 @@ const NavBar = observer(() => {
 <Navbar
     expand="lg"
     className={`navbar ${theme === "theme-light" ? "navbar-light" : "navbar-dark"}`}
+    style={{
+        height:"76px",
+        boxShadow:"0px 4px 15px rgba(102, 102, 102, 0.12)"
+    }}
 >
     <Container fluid>
         <NavLink
             style={{
-                color: "inherit", // Используем текущий цвет текста темы
-                textDecoration: "none",
-                fontSize: "1.5rem",
-                fontWeight: "bold"
+                textDecoration: "none"
+                
             }}
             to={MAIN_PAGE_ROUTE}
         >
             <img
                 src={skill}
-                alt="Overlay"
+                alt="logo"
                 style={{
-                    position: "absolute",
-                    top: "300",
-                    left: "-2%",
-                    transform: "translate(30%, -50%)",
-                    zIndex: "1",
-                    opacity: "1",
-                    width: "200px",
-                    height: "auto"
+                    margin: "25px"
                 }}
             />
         </NavLink>

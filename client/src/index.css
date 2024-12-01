@@ -40,8 +40,9 @@ button {
     background-color: var(--button-bg);
     color: var(--button-text);
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     padding: 10px 15px;
+    box-shadow: 0px 9px 15px #66666615;
 }
 
 button:hover {
@@ -294,21 +295,21 @@ button:hover {
 
 /* Кнопки внутри Navbar */
 .theme-light .navbar .btn {
-    background-color: #007bff; /* Синий фон кнопки */
+    background-color: #6DFF6A; /* Синий фон кнопки */
     color: #fff; /* Белый текст */
     border: none;
 }
 
 .theme-light .navbar .btn:hover {
-    background-color: #0056b3; /* Темно-синий фон при наведении */
+    background-color: #60de5e; /* Темно-синий фон при наведении */
 }
 
 .theme-dark .navbar .btn {
-    background-color: #37474f; /* Темный фон кнопки */
+    background-color: #6DFF6A; /* Темный фон кнопки */
     color: #fff; /* Белый текст */
     border: none;
 }
 
 .theme-dark .navbar .btn:hover {
-    background-color: #455a64; /* Светло-серый фон при наведении */
+    background-color: #60de5e; /* Светло-серый фон при наведении */
 }
