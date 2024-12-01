@@ -60,9 +60,9 @@ const CreateJobPage = () => {
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '70%',
-                height: '80%'
+                transform: 'translate(-50%, -43%)',
+                width: '900px',
+                height: '800px'
             }}>
         <div style={{ padding: '20px' }}>
             <h3>Добавить вакансию</h3>
