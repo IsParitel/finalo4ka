@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
+
 /* Глобальные стили */
 body {
     margin: 0;
@@ -28,11 +30,6 @@ body {
 /* Применение переменных */
 body {
     background-color: var(--bg-color) !important; /* !important чтобы переопределить другие стили */
-    color: var(--text-color);
-}
-
-.card {
-    background-color: var(--card-bg);
     color: var(--text-color);
 }
 
@@ -260,23 +257,32 @@ button:hover {
     color: #fff;
 }
 
+.navbar {
+    height: 76px;
+}
+
 
 /* Светлая тема */
 .theme-light .navbar {
     background-color: #f8f9fa; /* Светлый фон */
-    color: #000; /* Темный текст */
+    box-shadow: 0px 4px 15px rgba(102, 102, 102, 0.12);
 }
 
 /* Темная тема */
 .theme-dark .navbar {
     background-color: #1c1c1c; /* Темный фон */
-    color: #f5f5f5; /* Светлый текст */
+    box-shadow: 0px 4px 15px #00000012;
 }
 
 /* Кнопки внутри Navbar */
 .theme-light .navbar .btn {
+    border-radius: 6px;
+    box-shadow: 0px 9px 15px #66666615;
+    padding: auto 10px ;
     background-color: #6DFF6A; /* Синий фон кнопки */
-    color: #fff; /* Белый текст */
+    color: #303030; /* Белый текст */
+    font-family: "Kumbh Sans";
+    font-weight: 700;
     border: none;
 }
 
@@ -285,8 +291,12 @@ button:hover {
 }
 
 .theme-dark .navbar .btn {
+    border-radius: 6px;
+    box-shadow: 0px 9px 15px #66666615;
     background-color: #6DFF6A; /* Темный фон кнопки */
-    color: #fff; /* Белый текст */
+    color: #303030; /* Белый текст */
+    font-family: "Kumbh Sans";
+    font-weight: 700;
     border: none;
 }
 
