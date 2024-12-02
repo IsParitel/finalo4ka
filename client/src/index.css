@@ -48,6 +48,30 @@ button:hover {
     border-radius: 25px;
 }
 
+.cards_flex{
+    background-color: #EEFFEE;
+    width: 367px;
+    height: 293px;
+    border-radius: 30px;
+    box-shadow: 0px 14px 14px #66666620;
+}
+
+.name_main_cards_flex{
+    font-family: "Kumbh Sans";
+    font-weight: 800;
+    font-size: 24px;
+    margin: 50px 80px;
+    text-align: left;
+}
+
+.name_dlc_cards_flex{
+    font-family: "Kumbh Sans";
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 15%;
+    text-align: left;
+}
+
 /* Общие стили для модального окна */
 .modal-content {
     border-radius: 10px; /* Радиус скругления */
