@@ -201,6 +201,11 @@ button:hover {
     opacity: 0.7; /* Сделать полосу полупрозрачной */
 }
 
+.card {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
 /* Для светлой темы */
 .theme-light .dropdown-menu {
     background-color: #fff; /* Белый фон */
