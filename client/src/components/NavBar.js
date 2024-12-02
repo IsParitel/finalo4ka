@@ -7,6 +7,7 @@ import { observer } from "mobx-react-lite";
 import { ThemeContext } from "../index";
 import LightLogo from '../assets/SkillHorizon.png'; // Светлая тема (на тёмном фоне)
 import DarkLogo from '../assets/SkillHorizon_black.png'; // Тёмная тема (на светлом фоне)
+import DarkAccount from '../assets/account_black.svg'; // Тёмная тема (на светлом фоне)
 
 const NavBar = observer(() => {
     const { user } = useContext(Context);
@@ -69,8 +70,11 @@ const NavBar = observer(() => {
                             )}
                             {user.isAuth && (
                                 <>
-                                    <Button variant="outline-light" onClick={() => navigate(PROFILE_ROUTE)}>
-                                        Профиль
+                                    <Button variant="outline-light" onClick={() => navigate(PROFILE_ROUTE)} className="account">
+                                        <img
+                                            src={DarkAccount}
+                                            alt="Account"
+                                        />
                                     </Button>
                                     <Button variant="outline-light" onClick={logOut}>
                                         Выйти

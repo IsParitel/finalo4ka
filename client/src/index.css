@@ -33,17 +33,19 @@ body {
     color: var(--text-color);
 }
 
-button {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 6px;
-    padding: 10px 15px;
-    box-shadow: 0px 9px 15px #66666615;
-}
 
 button:hover {
     opacity: 0.9;
+}
+
+.account{
+    background-color:#6DFF6A;
+    border-radius: 25px;
+}
+
+.account:hover{
+    background-color:#60de5e;
+    border-radius: 25px;
 }
 
 /* Общие стили для модального окна */
@@ -281,25 +283,25 @@ button:hover {
 
 /* Кнопки внутри Navbar */
 .theme-light .navbar .btn {
-    border-radius: 6px;
-    box-shadow: 0px 9px 15px #66666615;
-    padding: auto 10px ;
-    background-color: #6DFF6A; /* Синий фон кнопки */
-    color: #303030; /* Белый текст */
+    border-radius: 14px;
+    box-shadow: 0px 4px 4px #66666615;
+    padding: auto;
+    background-color: #6DFF6A;
+    color: #303030;
     font-family: "Kumbh Sans";
     font-weight: 700;
     border: none;
 }
 
 .theme-light .navbar .btn:hover {
-    background-color: #60de5e; /* Темно-синий фон при наведении */
+    background-color: #60de5e;
 }
 
 .theme-dark .navbar .btn {
-    border-radius: 6px;
-    box-shadow: 0px 9px 15px #66666615;
-    background-color: #6DFF6A; /* Темный фон кнопки */
-    color: #303030; /* Белый текст */
+    border-radius: 14px;
+    box-shadow: 0px 4px 4px #6dff6a25;
+    background-color: #6DFF6A;
+    color: #303030;
     font-family: "Kumbh Sans";
     font-weight: 700;
     border: none;
