@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col, Card, Image, Button } from "react-bootstrap";
-import { fetchProfile, deleteJobReg } from "../http/userAPI";
+import { fetchProfile, deleteJobReg, fetchJobCreates } from "../http/userAPI";
 import { Context } from "../index";
 import { fetchOneJob_page } from "../http/job_pageAPI";
 import blankImage from "../assets/blank.png";
@@ -12,20 +12,40 @@ const ProfilePage = () => {
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [jobPages, setJobPages] = useState([]);
+    const [createdJobs, setCreatedJobs] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetchProfile()
-            .then((data) => {
-                setProfile(data);
-                return data.job_pages;
-            })
-            .then((jobPagesIds) =>
-                Promise.all(jobPagesIds.map((job) => fetchOneJob_page(job.id)))
-            )
-            .then((jobData) => setJobPages(jobData))
-            .catch((err) => console.error("Ошибка при загрузке профиля:", err))
-            .finally(() => setLoading(false));
+        const fetchData = async () => {
+            try {
+                // Загрузка профиля
+                const profileData = await fetchProfile();
+                setProfile(profileData);
+
+                // Загрузка вакансий пользователя
+                const jobResponses = await Promise.all(
+                    profileData.job_pages.map((job) => fetchOneJob_page(job.id))
+                );
+                setJobPages(jobResponses);
+
+                // Получаем вакансии, которые были созданы пользователем
+                const createdJobsData = await fetchJobCreates(profileData.profile_page.id);
+
+                // Для каждого созданного job_create получаем данные вакансии
+                const jobDetails = await Promise.all(
+                    createdJobsData.map((job_create) => fetchOneJob_page(job_create.job_pageId))
+                );
+
+                // Сохраняем полные данные о созданных вакансиях
+                setCreatedJobs(jobDetails);
+            } catch (err) {
+                console.error("Ошибка при загрузке профиля:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
     }, []);
 
     const handleDeleteJob = async (job_pageId) => {
@@ -105,13 +125,51 @@ const ProfilePage = () => {
                 </Col>
             </Row>
 
-            {/* Список вакансий */}
+            {/* Список вакансий, на которые откликнулся пользователь */}
             <Row className="mt-4">
                 <Col>
+                    <h4>Ваши отклики:</h4>
                     {jobPages.length > 0 ? (
+                        jobPages.map((job, index) => (
+                            <Card key={index} className="mb-3 shadow-sm">
+                                <Card.Body className="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <Card.Title>{job.name}</Card.Title>
+                                        <Card.Text>{job.description}</Card.Text>
+                                        <Image
+                                            src={process.env.REACT_APP_API_URL + job.img}
+                                            alt={job.name}
+                                            style={{
+                                                width: "100%",
+                                                height: "200px",
+                                                objectFit: "cover",
+                                            }}
+                                        />
+                                    </div>
+                                    <Button
+                                        variant="danger"
+                                        onClick={() => handleDeleteJob(job.id)}
+                                    >
+                                        Отозвать заявление
+                                    </Button>
+                                </Card.Body>
+                            </Card>
+                        ))
+                    ) : (
+                        <p style={{ textShadow: "2px 2px 5px rgba(0,0,0,0.7)", fontSize: "2rem" }}>
+                            У вас пока нет откликов.
+                        </p>
+                    )}
+                </Col>
+            </Row>
+
+            {/* Созданные вакансии */}
+            <Row className="mt-4">
+                <Col>
+                    {createdJobs.length > 0 ? (
                         <div>
-                            <h4>Ваши вакансии:</h4>
-                            {jobPages.map((job, index) => (
+                            <h4>Созданные вакансии:</h4>
+                            {createdJobs.map((job, index) => (
                                 <Card key={index} className="mb-3 shadow-sm">
                                     <Card.Body className="d-flex justify-content-between align-items-center">
                                         <div>
@@ -127,26 +185,16 @@ const ProfilePage = () => {
                                                 }}
                                             />
                                         </div>
-                                        <Button
-                                            variant="danger"
-                                            onClick={() => handleDeleteJob(job.id)}
-                                        >
-                                            Отозвать заявление
-                                        </Button>
                                     </Card.Body>
                                 </Card>
                             ))}
                         </div>
                     ) : (
-                            <p style={{ textShadow: "2px 2px 5px rgba(0,0,0,0.7)", transform: "translate(35%, 100%)", fontSize: "2rem" }}>
-                                У вас пока нет вакансий.
-                            </p>
-                    )
-
-
-                    }
+                        <p>Вы еще не создали вакансии.</p>
+                    )}
                 </Col>
             </Row>
+
             <Row>
                 <Col>
                     <Button

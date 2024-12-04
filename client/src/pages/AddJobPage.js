@@ -3,6 +3,7 @@ import {Button, Card, Dropdown, Form} from "react-bootstrap";
 import { createJob_page, fetchOtrasls, fetchSpecials } from "../http/job_pageAPI";
 import { useNavigate } from "react-router-dom";
 import {MAIN_PAGE_ROUTE} from "../utils/consts"; // Используем useNavigate для перенаправления
+import { addJobToProfile, fetchProfile } from "../http/userAPI";
 
 const CreateJobPage = () => {
     const navigate = useNavigate(); // Хук для перенаправления на другую страницу
@@ -40,14 +41,23 @@ const CreateJobPage = () => {
             formData.append('specialId', selectedSpecialId);
             formData.append('description', description); // Описание вакансии
 
-            createJob_page(formData).then((data) => {
-                alert("Вакансия добавлена!");
-                // Перенаправляем на страницу созданной вакансии
-                navigate(MAIN_PAGE_ROUTE); // Предположим, что в ответе есть id вакансии
-            }).catch((error) => {
-                console.error("Ошибка при добавлении вакансии:", error);
-                alert("Произошла ошибка при добавлении вакансии.");
-            });
+            createJob_page(formData)
+                .then(async (data) => {
+                    alert("Вакансия добавлена!");
+
+                    // Получаем profile_pageId текущего пользователя
+                    const profile = await fetchProfile();
+                    const profile_pageId = profile.profile_page.id;
+
+                    // Добавляем вакансию в профиль пользователя
+                    await addJobToProfile(data.id, profile_pageId);
+
+                    navigate(MAIN_PAGE_ROUTE); // Перенаправляем на главную страницу
+                })
+                .catch((error) => {
+                    console.error("Ошибка при добавлении вакансии:", error);
+                    alert("Произошла ошибка при добавлении вакансии.");
+                });
         } else {
             alert("Пожалуйста, заполните все поля.");
         }

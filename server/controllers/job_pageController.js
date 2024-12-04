@@ -1,6 +1,6 @@
 const uuid = require('uuid');
 const path = require('path');
-const { Job_page, Profile_page, Special } = require('../models/models');
+const { Job_page, Profile_page, Special, Job_create } = require('../models/models');
 const ApiError = require('../error/ApiError');
 
 class Job_pageController {
@@ -8,16 +8,19 @@ class Job_pageController {
         try {
             const { name, otraslId, specialId, description } = req.body;
 
+            // Проверка наличия изображения
             if (!req.files || !req.files.img) {
                 return next(ApiError.badRequest('Файл изображения не передан'));
             }
             const { img } = req.files;
 
+            // Проверка типа изображения
             const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
             if (!validTypes.includes(img.mimetype)) {
                 return next(ApiError.badRequest('Неверный формат файла. Только JPG, JPEG и PNG разрешены.'));
             }
 
+            // Проверка специальности и связи с отраслью
             const special = await Special.findOne({ where: { id: specialId } });
             if (!special) {
                 return next(ApiError.badRequest('Указанная специальность не найдена'));
@@ -26,15 +29,18 @@ class Job_pageController {
                 return next(ApiError.badRequest('Специальность не связана с указанной отраслью'));
             }
 
+            // Генерация имени файла и сохранение изображения
             const filename = uuid.v4() + path.extname(img.name);
             img.mv(path.resolve(__dirname, '..', 'static', filename));
 
-            const { id: userId } = req.user;
+            // Получение профиля пользователя
+            const { id: userId } = req.user; // req.user предполагается добавленным через middleware аутентификации
             const profile_page = await Profile_page.findOne({ where: { userId } });
             if (!profile_page) {
                 return next(ApiError.badRequest('Профиль пользователя не найден'));
             }
 
+            // Создание вакансии
             const job_page = await Job_page.create({
                 name,
                 otraslId,
@@ -43,8 +49,15 @@ class Job_pageController {
                 description,
             });
 
+            // Создание связи в job_create
+            await Job_create.create({
+                job_pageId: job_page.id,
+                profile_pageId: profile_page.id,
+            });
+
             return res.json(job_page);
         } catch (e) {
+            console.error(e);
             next(ApiError.badRequest(e.message));
         }
     }

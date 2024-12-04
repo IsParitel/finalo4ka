@@ -21,7 +21,7 @@ export const fetchSpecials = async (otraslId) => {
 };
 
 export const createJob_page = async (job_page) => {
-    const { data } = await $authHost.post('/api/job_page', job_page);
+    const { data } = await $authHost.post('/api/job_page', job_page); // job_page включает данные профиля
     return data;
 };
 

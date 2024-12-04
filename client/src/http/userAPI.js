@@ -31,7 +31,7 @@ export const fetchProfile = async () => {
     const userId = decoded.id;
 
     const { data } = await $authHost.get(`/api/profile_page/${userId}`);
-    return data;
+    return data; // Убедитесь, что данные включают связанные `job_create`.
 };
 
 export const fetchJobReg = async (jobPageId) => {
@@ -55,5 +55,15 @@ export const fetchJobReg = async (jobPageId) => {
 
 export const deleteJobReg = async (job_pageId, profile_pageId) => {
     const { data } = await $authHost.delete(`/api/job_reg/${job_pageId}/${profile_pageId}`);
+    return data;
+};
+
+export const addJobToProfile = async (job_pageId, profile_pageId) => {
+    const { data } = await $authHost.post('/api/job_create', { job_pageId, profile_pageId });
+    return data;
+};
+
+export const fetchJobCreates = async (profile_pageId) => {
+    const { data } = await $authHost.get(`/api/job_create/profile/${profile_pageId}`);
     return data;
 };
