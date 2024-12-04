@@ -34,3 +34,8 @@ export const fetchOneJob_page = async (id) => {
     const {data} = await $host.get('/api/job_page/' + id);
     return data;
 };
+
+export const deleteJobPage = async (id) => {
+    const { data } = await $authHost.delete(`/api/job_page/${id}`);
+    return data;
+};

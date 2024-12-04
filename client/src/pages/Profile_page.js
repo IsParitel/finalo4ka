@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col, Card, Image, Button } from "react-bootstrap";
 import { fetchProfile, deleteJobReg, fetchJobCreates } from "../http/userAPI";
 import { Context } from "../index";
-import { fetchOneJob_page } from "../http/job_pageAPI";
+import { fetchOneJob_page, deleteJobPage } from "../http/job_pageAPI";
 import blankImage from "../assets/blank.png";
 import { useNavigate } from "react-router-dom";
 import { JOB_LIST_ROUTE } from "../utils/consts";
@@ -48,12 +48,33 @@ const ProfilePage = () => {
         fetchData();
     }, []);
 
-    const handleDeleteJob = async (job_pageId) => {
+    const handleRevokeJob = async (job_pageId) => {
         try {
+            // Запрос для отзыва вакансии (удаляет только связь job_reg)
             await deleteJobReg(job_pageId, profile.profile_page.id);
+
+            // Обновляем список вакансий
             setJobPages((prevJobPages) =>
                 prevJobPages.filter((job) => job.id !== job_pageId)
             );
+
+            alert("Вакансия успешно отозвана!");
+        } catch (error) {
+            console.error("Ошибка при отзыве вакансии:", error);
+            alert("Не удалось отозвать вакансию.");
+        }
+    };
+
+    const handleDeleteJob = async (job_pageId) => {
+        try {
+            // Запрос для удаления вакансии (включая все связи и саму вакансию)
+            await deleteJobPage(job_pageId);
+
+            // Обновляем список вакансий
+            setJobPages((prevJobPages) =>
+                prevJobPages.filter((job) => job.id !== job_pageId)
+            );
+
             alert("Вакансия успешно удалена!");
         } catch (error) {
             console.error("Ошибка при удалении вакансии:", error);
@@ -148,7 +169,7 @@ const ProfilePage = () => {
                                     </div>
                                     <Button
                                         variant="danger"
-                                        onClick={() => handleDeleteJob(job.id)}
+                                        onClick={() => handleRevokeJob(job.id)}
                                     >
                                         Отозвать заявление
                                     </Button>
@@ -185,6 +206,9 @@ const ProfilePage = () => {
                                                 }}
                                             />
                                         </div>
+                                        <Button variant="danger" onClick={() => handleDeleteJob(job.id)}>
+                                            Удалить вакансию
+                                        </Button>
                                     </Card.Body>
                                 </Card>
                             ))}

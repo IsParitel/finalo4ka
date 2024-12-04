@@ -1,6 +1,6 @@
 const uuid = require('uuid');
 const path = require('path');
-const { Job_page, Profile_page, Special, Job_create } = require('../models/models');
+const { Job_page, Job_reg, Profile_page, Special, Job_create } = require('../models/models');
 const ApiError = require('../error/ApiError');
 
 class Job_pageController {
@@ -107,9 +107,16 @@ class Job_pageController {
                 return res.status(404).json({ message: 'Вакансия не найдена' });
             }
 
+            // Удаление записей из job_reg, если они существуют
+            await Job_reg.destroy({ where: { job_pageId: id } });
+
+            // Удаление записей из job_create, если они существуют
+            await Job_create.destroy({ where: { job_pageId: id } });
+
+            // Удаление самой вакансии
             await job_page.destroy();
 
-            return res.json({ message: 'Вакансия успешно удалена' });
+            return res.json({ message: 'Вакансия и связанные записи успешно удалены' });
         } catch (e) {
             next(ApiError.badRequest(e.message));
         }
