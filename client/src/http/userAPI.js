@@ -2,11 +2,15 @@ import {$authHost, $host} from "./index";
 import {jwtDecode} from "jwt-decode";
 import {fetchOneJob_page} from "./job_pageAPI";
 
-export const registration = async (email, password, imya, familia, otchestvo, sharaga, gorod, kurs, birth, telefon) => {
-    const {data} = await $host.post('/api/user/registration', {email, password, imya, familia, otchestvo, sharaga, gorod, kurs, birth, telefon, role: 'USER'})
-    localStorage.setItem('token', data.token)
-    return jwtDecode(data.token)
-}
+export const registration = async (formData) => {
+    const { data } = await $host.post('/api/user/registration', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+    localStorage.setItem('token', data.token);
+    return jwtDecode(data.token);
+};
 
 export const login = async (email, password) => {
     const {data} = await $host.post('/api/user/login', {email, password})

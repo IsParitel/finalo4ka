@@ -9,12 +9,14 @@ const User = sequelize.define('user', {
     familia: { type: DataTypes.STRING },
     imya: { type: DataTypes.STRING },
     otchestvo: { type: DataTypes.STRING },
-    //image: { type: DataTypes.STRING },
+    avatar: { type: DataTypes.STRING, allowNull: true }, // Добавлено поле для аватарки
     gorod: { type: DataTypes.STRING },
     sharaga: { type: DataTypes.STRING },
     kurs: { type: DataTypes.INTEGER },
     birth: { type: DataTypes.DATE },
     telefon: { type: DataTypes.STRING, unique: true },
+    otraslId: { type: DataTypes.INTEGER, allowNull: true }, // Добавлено поле для отрасли
+    specialId: { type: DataTypes.INTEGER, allowNull: true }, // Добавлено поле для специальности
 });
 
 const Profile_page = sequelize.define('profile_page', {

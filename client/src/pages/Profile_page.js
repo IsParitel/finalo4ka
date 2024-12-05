@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { JOB_LIST_ROUTE } from "../utils/consts";
 
 const ProfilePage = () => {
-    const { user } = useContext(Context);
+    const { user } = useContext(Context); // Получаем данные пользователя
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [jobPages, setJobPages] = useState([]);
@@ -71,8 +71,8 @@ const ProfilePage = () => {
             await deleteJobPage(job_pageId);
 
             // Обновляем список вакансий
-            setJobPages((prevJobPages) =>
-                prevJobPages.filter((job) => job.id !== job_pageId)
+            setCreatedJobs((prevCreatedJobs) =>
+                prevCreatedJobs.filter((job) => job.id !== job_pageId)
             );
 
             alert("Вакансия успешно удалена!");
@@ -113,7 +113,7 @@ const ProfilePage = () => {
                     >
                         <Card.Body className="d-flex flex-column align-items-center">
                             <Image
-                                src={blankImage}
+                                src={profile.user.avatar ? `${process.env.REACT_APP_API_URL}/${profile.user.avatar}` : blankImage}
                                 roundedCircle
                                 style={{
                                     width: "150px",
@@ -122,6 +122,7 @@ const ProfilePage = () => {
                                     objectFit: "cover",
                                     marginBottom: "15px",
                                 }}
+                                alt="Аватар пользователя"
                             />
                             <Card.Title style={{ fontSize: "20px", fontWeight: "bold" }}>
                                 {imya} {familia}
@@ -147,50 +148,12 @@ const ProfilePage = () => {
             </Row>
 
             {/* Список вакансий, на которые откликнулся пользователь */}
-            <Row className="mt-4">
-                <Col>
-                    <h4>Ваши отклики:</h4>
-                    {jobPages.length > 0 ? (
-                        jobPages.map((job, index) => (
-                            <Card key={index} className="mb-3 shadow-sm">
-                                <Card.Body className="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <Card.Title>{job.name}</Card.Title>
-                                        <Card.Text>{job.description}</Card.Text>
-                                        <Image
-                                            src={process.env.REACT_APP_API_URL + job.img}
-                                            alt={job.name}
-                                            style={{
-                                                width: "100%",
-                                                height: "200px",
-                                                objectFit: "cover",
-                                            }}
-                                        />
-                                    </div>
-                                    <Button
-                                        variant="danger"
-                                        onClick={() => handleRevokeJob(job.id)}
-                                    >
-                                        Отозвать заявление
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        ))
-                    ) : (
-                        <p style={{ textShadow: "2px 2px 5px rgba(0,0,0,0.7)", fontSize: "2rem" }}>
-                            У вас пока нет откликов.
-                        </p>
-                    )}
-                </Col>
-            </Row>
-
-            {/* Созданные вакансии */}
-            <Row className="mt-4">
-                <Col>
-                    {createdJobs.length > 0 ? (
-                        <div>
-                            <h4>Созданные вакансии:</h4>
-                            {createdJobs.map((job, index) => (
+            {(user.role === "ADMIN" || user.role === "USER") && (
+                <Row className="mt-4">
+                    <Col>
+                        <h4>Ваши отклики:</h4>
+                        {jobPages.length > 0 ? (
+                            jobPages.map((job, index) => (
                                 <Card key={index} className="mb-3 shadow-sm">
                                     <Card.Body className="d-flex justify-content-between align-items-center">
                                         <div>
@@ -206,18 +169,62 @@ const ProfilePage = () => {
                                                 }}
                                             />
                                         </div>
-                                        <Button variant="danger" onClick={() => handleDeleteJob(job.id)}>
-                                            Удалить вакансию
+                                        <Button
+                                            variant="danger"
+                                            onClick={() => handleRevokeJob(job.id)}
+                                        >
+                                            Отозвать заявление
                                         </Button>
                                     </Card.Body>
                                 </Card>
-                            ))}
-                        </div>
-                    ) : (
-                        <p>Вы еще не создали вакансии.</p>
-                    )}
-                </Col>
-            </Row>
+                            ))
+                        ) : (
+                            <p style={{ textShadow: "2px 2px 5px rgba(0,0,0,0.7)", fontSize: "2rem" }}>
+                                У вас пока нет откликов.
+                            </p>
+                        )}
+                    </Col>
+                </Row>
+            )}
+
+            {/* Созданные вакансии */}
+            {(user.role === "ADMIN" || user.role === "RABOTA") && (
+                <Row className="mt-4">
+                    <Col>
+                        {createdJobs.length > 0 ? (
+                            <div>
+                                <h4>Созданные вакансии:</h4>
+                                {createdJobs.map((job, index) => (
+                                    <Card key={index} className="mb-3 shadow-sm">
+                                        <Card.Body className="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <Card.Title>{job.name}</Card.Title>
+                                                <Card.Text>{job.description}</Card.Text>
+                                                <Image
+                                                    src={process.env.REACT_APP_API_URL + job.img}
+                                                    alt={job.name}
+                                                    style={{
+                                                        width: "100%",
+                                                        height: "200px",
+                                                        objectFit: "cover",
+                                                    }}
+                                                />
+                                            </div>
+                                            {(user.role === "ADMIN" || user.role === "USER") && (
+                                                <Button variant="danger" onClick={() => handleDeleteJob(job.id)}>
+                                                    Удалить вакансию
+                                                </Button>
+                                            )}
+                                        </Card.Body>
+                                    </Card>
+                                ))}
+                            </div>
+                        ) : (
+                            <p>Вы еще не создали вакансии.</p>
+                        )}
+                    </Col>
+                </Row>
+            )}
 
             <Row>
                 <Col>
@@ -230,7 +237,7 @@ const ProfilePage = () => {
                             fontWeight: "bold",
                             borderRadius: "30px",
                             background: "rgba(255, 255, 255, 0.8)",
-                            backgroundSize:"couver",
+                            backgroundSize: "cover",
                             color: "black",
                             border: "2px solid white",
                             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.4)",
@@ -241,7 +248,6 @@ const ProfilePage = () => {
                     </Button>
                 </Col>
             </Row>
-
         </Container>
     );
 };
