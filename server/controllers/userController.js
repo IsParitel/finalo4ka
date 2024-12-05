@@ -5,9 +5,9 @@ const { User, Profile_page } = require('../models/models');
 const path = require('path');
 const uuid = require('uuid');
 
-const generateJwt = (id, email, telefon, role) => {
+const generateJwt = (id, email, telefon, role, otraslId = null, specialId = null) => {
     return jwt.sign(
-        { id, email, telefon, role },
+        { id, email, telefon, role, otraslId, specialId },
         process.env.SECRET_KEY,
         { expiresIn: '24h' }
     );
@@ -79,7 +79,7 @@ class UserController {
             await Profile_page.create({ userId: user.id });
 
             // Генерация токена
-            const token = generateJwt(user.id, user.email, user.telefon, user.role);
+            const token = generateJwt(user.id, user.email, user.telefon, user.role, otraslId, specialId);
             return res.json({ token });
         } catch (error) {
             console.error(error);
@@ -88,22 +88,57 @@ class UserController {
     }
 
     async login(req, res, next) {
-        const { email, password } = req.body;
-        const user = await User.findOne({ where: { email } });
-        if (!user) {
-            return next(ApiError.badRequest('Такого пользователя не существует'));
+        try {
+            const { email, password } = req.body;
+            const user = await User.findOne({ where: { email } });
+            if (!user) {
+                return next(ApiError.badRequest('Такого пользователя не существует'));
+            }
+
+            const comparePassword = bcrypt.compareSync(password, user.password);
+            if (!comparePassword) {
+                return next(ApiError.badRequest('Указан неверный пароль'));
+            }
+
+            const token = generateJwt(user.id, user.email, user.telefon, user.role, user.otraslId, user.specialId);
+            return res.json({ token });
+        } catch (error) {
+            console.error(error);
+            return next(ApiError.internal('Ошибка при входе.'));
         }
-        let comparePassword = bcrypt.compareSync(password, user.password);
-        if (!comparePassword) {
-            return next(ApiError.badRequest('Указан неверный пароль'));
-        }
-        const token = generateJwt(user.id, user.email, user.telefon, user.role);
-        return res.json({ token });
     }
 
     async check(req, res, next) {
-        const token = generateJwt(req.user.id, req.user.email, req.user.telefon, req.user.role);
-        return res.json({ token });
+        try {
+            // Извлечение пользователя из базы данных для получения otraslId и specialId
+            const user = await User.findOne({
+                where: { id: req.user.id },
+                attributes: ['otraslId', 'specialId', 'email', 'telefon', 'role'], // Указываем необходимые поля
+            });
+
+            if (!user) {
+                return next(ApiError.badRequest('Пользователь не найден'));
+            }
+
+            // Создание нового токена
+            const token = generateJwt(
+                req.user.id,
+                user.email,
+                user.telefon,
+                user.role,
+                user.otraslId,
+                user.specialId
+            );
+
+            return res.json({
+                token,
+                otraslId: user.otraslId,
+                specialId: user.specialId,
+            });
+        } catch (error) {
+            console.error(error);
+            return next(ApiError.internal('Ошибка при проверке токена.'));
+        }
     }
 }
 

@@ -22,22 +22,26 @@ const ProfilePage = () => {
                 const profileData = await fetchProfile();
                 setProfile(profileData);
 
-                // Загрузка вакансий пользователя
+                // Загрузка откликов пользователя
                 const jobResponses = await Promise.all(
                     profileData.job_pages.map((job) => fetchOneJob_page(job.id))
                 );
                 setJobPages(jobResponses);
 
-                // Получаем вакансии, которые были созданы пользователем
+                // Получаем вакансии, созданные пользователем
                 const createdJobsData = await fetchJobCreates(profileData.profile_page.id);
 
-                // Для каждого созданного job_create получаем данные вакансии
+                // Для каждой созданной вакансии получаем детализированные данные
                 const jobDetails = await Promise.all(
                     createdJobsData.map((job_create) => fetchOneJob_page(job_create.job_pageId))
                 );
 
-                // Сохраняем полные данные о созданных вакансиях
-                setCreatedJobs(jobDetails);
+                // Убираем дубли перед обновлением состояния
+                const uniqueJobs = Array.from(
+                    new Map(jobDetails.map((job) => [job.id, job])).values()
+                );
+
+                setCreatedJobs(uniqueJobs);
             } catch (err) {
                 console.error("Ошибка при загрузке профиля:", err);
             } finally {

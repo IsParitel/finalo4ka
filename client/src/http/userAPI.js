@@ -71,3 +71,20 @@ export const fetchJobCreates = async (profile_pageId) => {
     const { data } = await $authHost.get(`/api/job_create/profile/${profile_pageId}`);
     return data;
 };
+
+export const getUserDetails = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        throw new Error('Пользователь не авторизован');
+    }
+
+    const decoded = jwtDecode(token);
+    return {
+        id: decoded.id,
+        email: decoded.email,
+        telefon: decoded.telefon,
+        role: decoded.role,
+        otraslId: decoded.otraslId,
+        specialId: decoded.specialId,
+    };
+};
