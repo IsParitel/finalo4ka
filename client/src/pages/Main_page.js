@@ -5,9 +5,11 @@ import hat from "../assets/hat.png";
 
 const MainPage = () => {
 
+
+
     return (
         <Container>
-            <div 
+            <div
                 style={{
                     display: "flex", // Используем Flexbox
                     justifyContent: "center", // Центрируем по горизонтали
@@ -42,7 +44,7 @@ const MainPage = () => {
                 </div>
             </div>
 
-            <div 
+            <div
                 style={{
                     display: "flex", // Flexbox для создания колонок
                     justifyContent: "space-between", // Равномерное распределение между колонками
@@ -51,16 +53,39 @@ const MainPage = () => {
                     transform: "translate(0, -50%)"
                 }}
             >
-                <div className="cards_flex" style={{ flex: "1", textAlign: "center" }}>
+                <div className="cards_flex" style={{ flex: "1", textAlign: "center", transform: "translate(0, 150px)" }}>
                     <h1 className="name_main_cards_flex">Легкий способ <br></br> найти стажировку  <p className="name_dlc_cards_flex">Большое количество актуальных стажировок</p></h1>
                 </div>
-                <div className="cards_flex" style={{ flex: "1", textAlign: "center" }}>
+                <div className="cards_flex" style={{ flex: "1", textAlign: "center", transform: "translate(0, 150px)" }}>
                     <h1 className="name_main_cards_flex">Стажировка <br></br> по профессии <p className="name_dlc_cards_flex">Вы с легкостью сможете найти стажировку по своей профессии</p></h1>
                 </div>
-                <div className="cards_flex" style={{ flex: "1", textAlign: "center" }}>
+                <div className="cards_flex" style={{ flex: "1", textAlign: "center", transform: "translate(0, 150px)"}}>
                     <h1 className="name_main_cards_flex">Компании заинтересованы<br></br> в стажерах <p className="name_dlc_cards_flex">Организации в поисках потенциальных сотрудников</p></h1>
                 </div>
             </div>
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </Container>
     );
 };
