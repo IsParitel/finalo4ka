@@ -48,12 +48,20 @@ button:hover {
     border-radius: 25px;
 }
 
-.cards_flex{
+.cards_flex {
     background-color: #60de5e;
-    width: 367px;
+    width: 100%; /* Займёт всю ширину контейнера */
+    max-width: 367px; /* Максимальная ширина для карточек */
+    margin: 0 auto; /* Центрирование при переходе в столбец */
     height: 293px;
+    border: none;
     border-radius: 30px;
     box-shadow: 0px 14px 14px #66666620;
+}
+
+div[style*="flex"] {
+    flex-direction: column; /* Карточки выстраиваются в столбец */
+    gap: 30px;
 }
 
 .name_main_cards_flex{

@@ -22,7 +22,7 @@ const MainPage = () => {
     };
 
     return (
-        <Container >
+        <Container>
             <div
                 style={{
                     display: "flex",
@@ -51,7 +51,6 @@ const MainPage = () => {
                             fontSize: "64px",
                             fontFamily: "Kumbh Sans",
                             fontWeight: "900",
-                            transform: "translate(0, -40%)",
                         }}
                     >
                         Твоя стажировка — новый этап. <br />
@@ -63,27 +62,28 @@ const MainPage = () => {
             <div
                 style={{
                     display: "flex",
+                    flexDirection: "row", // Горизонтальная компоновка по умолчанию
+                    flexWrap: "wrap",     // Разрешить перенос элементов на новую строку
                     justifyContent: "space-between",
                     alignItems: "flex-start",
                     gap: "30px",
-                    transform: "translate(0, -50%)",
                 }}
             >
-                <div className="cards_flex" style={{ flex: "1", textAlign: "center", transform: "translate(0, 150px)" }}>
+                <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center", transform: "translate(0, 150px)" }}>
                     <h1 className="name_main_cards_flex">
                         Легкий способ <br />
                         найти стажировку{" "}
                         <p className="name_dlc_cards_flex">Большое количество актуальных стажировок</p>
                     </h1>
                 </div>
-                <div className="cards_flex" style={{ flex: "1", textAlign: "center", transform: "translate(0, 150px)" }}>
+                <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center", transform: "translate(0, 150px)" }}>
                     <h1 className="name_main_cards_flex">
                         Стажировка <br />
                         по профессии{" "}
                         <p className="name_dlc_cards_flex">Вы с легкостью сможете найти стажировку по своей профессии</p>
                     </h1>
                 </div>
-                <div className="cards_flex" style={{ flex: "1", textAlign: "center", transform: "translate(0, 150px)" }}>
+                <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center", transform: "translate(0, 150px)" }}>
                     <h1 className="name_main_cards_flex">
                         Компании заинтересованы<br />
                         в стажерах{" "}
@@ -92,121 +92,150 @@ const MainPage = () => {
                 </div>
             </div>
 
+
             {/* Блок для учебного заведения */}
-            <Card style={{ border: "none", marginBottom: "50px", padding: "20px 50px",margin: "50px"}}>
+            <Card style={{ 
+                border: "none", 
+                padding: "50px 100px", 
+                margin: "150px 0", 
+                boxShadow:"0px 14px 14px #66666620", 
+                borderRadius:"30px"
+                }}>
                 <Row
-                    className="w-100 m-0"
                     style={{
                         padding: "20px 0",
-                        textAlign: "center",
+                        textAlign: "left", // Выравнивание текста по левому краю
                     }}
                 >
                     <Col>
-                        <h5 style={{ fontSize: "1.4rem", fontWeight: "700", marginBottom: "10px" }}>
+                        <h1 style={{ 
+                            fontSize: "32px", 
+                            fontWeight: "900", 
+                            }}>
                             Представляете учебное заведение?{" "}
                             <OverlayTrigger
                                 placement="top"
                                 overlay={<Tooltip>Свяжитесь с нами, чтобы добавить вашу стажировку или учебный курс.</Tooltip>}
                             >
-                    <span
-                        style={{
-                            fontSize: "1.2rem",
-                            marginLeft: "10px",
-                            cursor: "pointer",
-                        }}
-                    >
-                        &#9432; {/* Символ "i" в круге */}
-                    </span>
+                                <span
+                                    style={{
+                                        fontSize: "1.2rem",
+                                        marginLeft: "10px",
+                                        cursor: "pointer",
+                                    }}
+                                >
+                                    &#9432; {/* Символ "i" в круге */}
+                                </span>
                             </OverlayTrigger>
-                        </h5>
-                        <p style={{ fontSize: "1rem", color: "#555", marginBottom: "20px" }}>
+                        </h1>
+                        <p style={{
+                            fontWeight: "600",
+                            fontSize: "14px", 
+                            margin: "36px 0" 
+                            }}>
                             Зарегистрируйте ваше учебное заведение, чтобы предложить стажировки студентам!
                         </p>
                         <Form onSubmit={(e) => handleSubmit(e, "school")} className="mt-3">
-                            <Form.Group controlId="schoolEmail" style={{ marginBottom: "15px" }}>
+                            <Form.Group controlId="schoolEmail">
                                 <Form.Control
                                     type="email"
                                     placeholder="Введите email"
                                     value={schoolEmail}
                                     onChange={(e) => setSchoolEmail(e.target.value)}
                                     isInvalid={!!error}
-                                    style={{ maxWidth: "400px", margin: "0 auto" }}
+                                    style={{ maxWidth: "400px", margin: "38px 0" }}
                                 />
                                 <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
                             </Form.Group>
-                            <Button type="submit" variant="success">
+                            <Button type="submit" variant="success" style={{
+                                fontFamily:"Kumbh Sans",
+                                fontWeight:"800",
+                                borderRadius:"4px",
+                                border: "1px",
+                                background:"#60de5e",
+                                color:"#303030",
+                                width: "268px",
+                                height:"48px",
+                                boxShadow:"0px 14px 14px #66666620",
+                                }}>
                                 Отправить заявку
                             </Button>
                         </Form>
                     </Col>
                 </Row>
             </Card>
-
-            {/* Блок для организации */}
-            <Card style={{ border: "none", margin: "50px" }}>
+                        
+             {/* Блок для учебного заведения */}
+             <Card style={{ 
+                border: "none", 
+                padding: "50px 100px", 
+                margin: "150px 0", 
+                boxShadow:"0px 14px 14px #66666620", 
+                borderRadius:"30px"
+                }}>
                 <Row
-                    className="w-100 m-0"
                     style={{
                         padding: "20px 0",
-                        textAlign: "center",
+                        textAlign: "left", // Выравнивание текста по левому краю
                     }}
                 >
                     <Col>
-                        <h5 style={{ fontSize: "1.4rem", fontWeight: "700", marginBottom: "10px" }}>
+                        <h1 style={{ 
+                            fontSize: "32px", 
+                            fontWeight: "900", 
+                            }}>
                             Представляете организацию?{" "}
                             <OverlayTrigger
                                 placement="top"
-                                overlay={<Tooltip>Добавьте стажировку для студентов или выпускников.</Tooltip>}
+                                overlay={<Tooltip>Свяжитесь с нами, чтобы добавить вашу стажировку или учебный курс.</Tooltip>}
                             >
-                    <span
-                        style={{
-                            fontSize: "1.2rem",
-                            marginLeft: "10px",
-                            cursor: "pointer",
-                        }}
-                    >
-                        &#9432; {/* Символ "i" в круге */}
-                    </span>
+                                <span
+                                    style={{
+                                        fontSize: "1.2rem",
+                                        marginLeft: "10px",
+                                        cursor: "pointer",
+                                    }}
+                                >
+                                    &#9432; {/* Символ "i" в круге */}
+                                </span>
                             </OverlayTrigger>
-                        </h5>
-                        <p style={{ fontSize: "1rem", color: "#555", marginBottom: "20px" }}>
+                        </h1>
+                        <p style={{
+                            fontWeight: "600",
+                            fontSize: "14px", 
+                            margin: "36px 0" 
+                            }}>
                             Мы предлагаем платформу для поиска стажеров. Загрузите детали стажировки и найдите подходящих кандидатов.
                         </p>
-                        <Form onSubmit={(e) => handleSubmit(e, "organization")} className="mt-3">
-                            <Form.Group controlId="organizationEmail" style={{ marginBottom: "15px" }}>
+                        <Form onSubmit={(e) => handleSubmit(e, "school")} className="mt-3">
+                            <Form.Group controlId="schoolEmail">
                                 <Form.Control
                                     type="email"
                                     placeholder="Введите email"
-                                    value={organizationEmail}
-                                    onChange={(e) => setOrganizationEmail(e.target.value)}
+                                    value={schoolEmail}
+                                    onChange={(e) => setSchoolEmail(e.target.value)}
                                     isInvalid={!!error}
-                                    style={{ maxWidth: "400px", margin: "0 auto" }}
+                                    style={{ maxWidth: "400px", margin: "38px 0" }}
                                 />
                                 <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
                             </Form.Group>
-                            <Button type="submit" variant="success">
-                                Разместить стажировку
+                            <Button type="submit" variant="success" style={{
+                                fontFamily:"Kumbh Sans",
+                                fontWeight:"800",
+                                borderRadius:"4px",
+                                border: "1px",
+                                background:"#60de5e",
+                                color:"#303030",
+                                width: "268px",
+                                height:"48px",
+                                boxShadow:"0px 14px 14px #66666620",
+                                }}>
+                                Отправить заявку
                             </Button>
                         </Form>
                     </Col>
                 </Row>
             </Card>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </Container>
     );
 };
