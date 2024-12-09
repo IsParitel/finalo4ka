@@ -61,7 +61,15 @@ button:hover {
 
 div[style*="flex"] {
     flex-direction: column; /* Карточки выстраиваются в столбец */
-    gap: 30px;
+    width: 100%;
+}
+
+@media (max-width: 990px) {
+    .cards_flex {
+        width: 100%; /* Карточка займет всю ширину */
+        max-width: none; /* Убираем ограничение ширины */
+        margin: 10px auto; /* Добавляем отступ между карточками */
+    }
 }
 
 .name_main_cards_flex{
@@ -318,7 +326,7 @@ div[style*="flex"] {
     border-radius: 14px;
     box-shadow: 0px 4px 4px #66666615;
     padding: auto;
-    background-color: #6DFF6A;
+    background-color: #60de5e;
     color: #303030;
     font-family: "Kumbh Sans";
     font-weight: 700;
@@ -332,7 +340,7 @@ div[style*="flex"] {
 .theme-dark .navbar .btn {
     border-radius: 14px;
     box-shadow: 0px 4px 4px #6dff6a25;
-    background-color: #6DFF6A;
+    background-color: #60de5e;
     color: #303030;
     font-family: "Kumbh Sans";
     font-weight: 700;

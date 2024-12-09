@@ -85,7 +85,6 @@ const NavBar = observer(() => {
                             <Button
                                 variant="outline-light"
                                 onClick={toggleTheme}
-                                style={{ marginLeft: "10px", transform: "translate(-7%, 0%)" }}
                             >
                                 {theme === "theme-light" ? "Тёмная тема" : "Светлая тема"}
                             </Button>

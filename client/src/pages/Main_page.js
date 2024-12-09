@@ -39,7 +39,7 @@ const MainPage = () => {
                         justifyContent: "center",
                         alignItems: "center",
                         backgroundImage: `url(${magnifier})`,
-                        backgroundSize: "cover",
+                        backgroundSize: "contain",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
                         height: "100%",
@@ -51,6 +51,7 @@ const MainPage = () => {
                             fontSize: "64px",
                             fontFamily: "Kumbh Sans",
                             fontWeight: "900",
+                            marginTop:"-100px",
                         }}
                     >
                         Твоя стажировка — новый этап. <br />
@@ -66,24 +67,26 @@ const MainPage = () => {
                     flexWrap: "wrap",     // Разрешить перенос элементов на новую строку
                     justifyContent: "space-between",
                     alignItems: "flex-start",
+                    marginBottom:"150px",
+                    marginTop:"-150px",
                     gap: "30px",
                 }}
             >
-                <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center", transform: "translate(0, 150px)" }}>
+                <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center" }}>
                     <h1 className="name_main_cards_flex">
                         Легкий способ <br />
                         найти стажировку{" "}
                         <p className="name_dlc_cards_flex">Большое количество актуальных стажировок</p>
                     </h1>
                 </div>
-                <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center", transform: "translate(0, 150px)" }}>
+                <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center" }}>
                     <h1 className="name_main_cards_flex">
                         Стажировка <br />
                         по профессии{" "}
                         <p className="name_dlc_cards_flex">Вы с легкостью сможете найти стажировку по своей профессии</p>
                     </h1>
                 </div>
-                <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center", transform: "translate(0, 150px)" }}>
+                <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center" }}>
                     <h1 className="name_main_cards_flex">
                         Компании заинтересованы<br />
                         в стажерах{" "}
@@ -97,7 +100,6 @@ const MainPage = () => {
             <Card style={{ 
                 border: "none", 
                 padding: "50px 100px", 
-                margin: "150px 0", 
                 boxShadow:"0px 14px 14px #66666620", 
                 borderRadius:"30px"
                 }}>
@@ -129,11 +131,18 @@ const MainPage = () => {
                             </OverlayTrigger>
                         </h1>
                         <p style={{
-                            fontWeight: "600",
+                            fontWeight: "500",
                             fontSize: "14px", 
-                            margin: "36px 0" 
+                            margin: "36px 0",
+                            width:"300px"
                             }}>
                             Зарегистрируйте ваше учебное заведение, чтобы предложить стажировки студентам!
+                        </p>
+                        <p style={{
+                            fontWeight: "800",
+                            fontSize: "14px", 
+                            }}>
+                            Email
                         </p>
                         <Form onSubmit={(e) => handleSubmit(e, "school")} className="mt-3">
                             <Form.Group controlId="schoolEmail">
@@ -143,7 +152,7 @@ const MainPage = () => {
                                     value={schoolEmail}
                                     onChange={(e) => setSchoolEmail(e.target.value)}
                                     isInvalid={!!error}
-                                    style={{ maxWidth: "400px", margin: "38px 0" }}
+                                    style={{ maxWidth: "400px", marginBottom: "38px" }}
                                 />
                                 <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
                             </Form.Group>
@@ -169,7 +178,7 @@ const MainPage = () => {
              <Card style={{ 
                 border: "none", 
                 padding: "50px 100px", 
-                margin: "150px 0", 
+                margin: "50px 0", 
                 boxShadow:"0px 14px 14px #66666620", 
                 borderRadius:"30px"
                 }}>
@@ -201,11 +210,18 @@ const MainPage = () => {
                             </OverlayTrigger>
                         </h1>
                         <p style={{
-                            fontWeight: "600",
+                            fontWeight: "500",
                             fontSize: "14px", 
-                            margin: "36px 0" 
+                            margin: "36px 0",
+                            width:"300px"
                             }}>
                             Мы предлагаем платформу для поиска стажеров. Загрузите детали стажировки и найдите подходящих кандидатов.
+                        </p>
+                        <p style={{
+                            fontWeight: "800",
+                            fontSize: "14px", 
+                            }}>
+                            Email
                         </p>
                         <Form onSubmit={(e) => handleSubmit(e, "school")} className="mt-3">
                             <Form.Group controlId="schoolEmail">
@@ -215,7 +231,7 @@ const MainPage = () => {
                                     value={schoolEmail}
                                     onChange={(e) => setSchoolEmail(e.target.value)}
                                     isInvalid={!!error}
-                                    style={{ maxWidth: "400px", margin: "38px 0" }}
+                                    style={{ maxWidth: "400px", marginBottom: "38px" }}
                                 />
                                 <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
                             </Form.Group>
