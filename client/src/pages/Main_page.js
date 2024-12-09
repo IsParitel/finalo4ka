@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Card, Form, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-import magnifier from "../assets/main.png";
+import magnifier from "../assets/main.svg";
 
 const MainPage = () => {
     // Состояния для email и ошибок
