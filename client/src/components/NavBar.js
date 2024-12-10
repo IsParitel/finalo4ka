@@ -34,6 +34,8 @@ const NavBar = observer(() => {
                 expand="lg"
                 className={`navbar ${theme === "theme-light" ? "navbar-light" : "navbar-dark"}`}
                 style={{
+                    position: "fixed",
+                    width: "100%",
                     zIndex:100,
                 }}
             >
