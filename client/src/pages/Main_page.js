@@ -80,7 +80,7 @@ const MainPage = () => {
                 </div>
                 <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center" }}>
                     <h1 className="name_main_cards_flex">
-                        Стажировка по профессии{" "}
+                    Стажировка в выбранной профессии{" "}
                         <p className="name_dlc_cards_flex">Вы с легкостью сможете найти стажировку по своей профессии</p>
                     </h1>
                 </div>
