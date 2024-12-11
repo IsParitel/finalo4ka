@@ -97,12 +97,7 @@ const MainPage = () => {
 
 
             {/* Блок для учебного заведения */}
-            <Card style={{ 
-                border: "none", 
-                padding: "50px 100px", 
-                boxShadow:"0px 14px 14px #66666620", 
-                borderRadius:"30px"
-                }}>
+            <Card className="registration_for_enterprises">
                 <Row
                     style={{
                         padding: "20px 0",
@@ -175,12 +170,8 @@ const MainPage = () => {
             </Card>
                         
              {/* Блок для учебного заведения */}
-             <Card style={{ 
-                border: "none", 
-                padding: "50px 100px", 
+             <Card className="registration_for_enterprises" style={{ 
                 margin: "50px 0", 
-                boxShadow:"0px 14px 14px #66666620", 
-                borderRadius:"30px"
                 }}>
                 <Row
                     style={{
