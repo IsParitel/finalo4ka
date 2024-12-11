@@ -38,18 +38,36 @@ button:hover {
     opacity: 0.9;
 }
 
-.account{
+.theme-light .account{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
     background-color:#6DFF6A;
-    border-radius: 25px;
+    border-radius: 14px;
+    box-shadow: 0px 4px 15px #66666615;
+}
+
+.theme-dark .account{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    background-color:#6DFF6A;
+    border-radius: 14px;
+    box-shadow: 0px 4px 15px #66666615;
 }
 
 .account:hover{
     background-color:#60de5e;
-    border-radius: 25px;
 }
 
 .cards_flex {
-    background-color: #60de5e;
+    background-color: #6DFF6A;
     width: 100%; /* Займёт всю ширину контейнера */
     max-width: 367px; /* Максимальная ширина для карточек */
     margin: 0 auto; /* Центрирование при переходе в столбец */
@@ -60,8 +78,14 @@ button:hover {
     transition: box-shadow 0.3s ease-in, max-width 0.3s ease-out, background-color 0.3s ease-out;
 }
 
-.cards_flex:hover{
+.theme-light .cards_flex:hover{
     background-color: #ffffff;
+    max-width: 500px;
+    box-shadow: 0px 15px 70px 70px #60de5e1f;
+}
+
+.theme-dark .cards_flex:hover{
+    background-color: #1E1E1E;
     max-width: 500px;
     box-shadow: 0px 15px 70px 70px #60de5e1f;
 }
@@ -69,13 +93,12 @@ button:hover {
 .registration_for_enterprises{
     border: none;
     padding: 50px 80px;
-    box-shadow: 0px 14px 14px #66666620;
     border-radius: 30px;
 }
 
 .registration_for_enterprises:hover{
-    box-shadow: 0px 15px 70px 70px #60de5e1f;
-    transition: box-shadow 1s ease-in;
+    box-shadow: 0px 15px 70px 70px #6dff6a20;
+    transition: box-shadow 0.5s ease-in;
 }
 
 div[style*="flex"] {
@@ -91,7 +114,7 @@ div[style*="flex"] {
     }
 }
 
-.name_main_cards_flex{
+.theme-light .name_main_cards_flex{
     font-family: "Kumbh Sans";
     font-weight: 800;
     font-size: 24px;
@@ -99,13 +122,34 @@ div[style*="flex"] {
     text-align: left;
 }
 
-.name_dlc_cards_flex{
+.theme-dark .name_main_cards_flex{
+    color: #000;
+    font-family: "Kumbh Sans";
+    font-weight: 800;
+    font-size: 24px;
+    margin: 50px 80px;
+    text-align: left;
+    transition: color 0.3s ease-out;
+}
+
+
+.theme-light .name_dlc_cards_flex{
     font-family: "Kumbh Sans";
     font-weight: 500;
     font-size: 16px;
     margin-top: 15%;
     text-align: left;
 }
+
+.theme-dark .name_dlc_cards_flex{
+    color: #000;
+    font-family: "Kumbh Sans";
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 15%;
+    text-align: left;
+}
+
 
 /* Общие стили для модального окна */
 .modal-content {
@@ -343,9 +387,8 @@ div[style*="flex"] {
 /* Кнопки внутри Navbar */
 .theme-light .navbar .btn {
     border-radius: 14px;
-    box-shadow: 0px 4px 4px #66666615;
-    padding: auto;
-    background-color: #60de5e;
+    box-shadow: 0px 4px 15px #66666615;
+    background-color: #6DFF6A;
     color: #303030;
     font-family: "Kumbh Sans";
     font-weight: 700;
@@ -358,8 +401,8 @@ div[style*="flex"] {
 
 .theme-dark .navbar .btn {
     border-radius: 14px;
-    box-shadow: 0px 4px 4px #6dff6a25;
-    background-color: #60de5e;
+    box-shadow: 0px 4px 15px #6dff6a25;
+    background-color: #6DFF6A;
     color: #303030;
     font-family: "Kumbh Sans";
     font-weight: 700;

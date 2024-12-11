@@ -73,23 +73,20 @@ const MainPage = () => {
                 }}
             >
                 <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center" }}>
-                    <h1 className="name_main_cards_flex">
-                        Легкий способ <br />
-                        найти стажировку{" "}
-                        <p className="name_dlc_cards_flex">Большое количество актуальных стажировок</p>
-                    </h1>
+                        <h1 className="name_main_cards_flex">
+                            Легкий способ найти стажировку{" "}
+                            <p className="name_dlc_cards_flex">Большое количество актуальных стажировок</p>
+                        </h1>
                 </div>
                 <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center" }}>
                     <h1 className="name_main_cards_flex">
-                        Стажировка <br />
-                        по профессии{" "}
+                        Стажировка по профессии{" "}
                         <p className="name_dlc_cards_flex">Вы с легкостью сможете найти стажировку по своей профессии</p>
                     </h1>
                 </div>
                 <div className="cards_flex" style={{ flex: "1 1 100%", textAlign: "center" }}>
                     <h1 className="name_main_cards_flex">
-                        Компании заинтересованы<br />
-                        в стажерах{" "}
+                        Компании заинтересованы в стажерах{" "}
                         <p className="name_dlc_cards_flex">Организации в поисках потенциальных сотрудников</p>
                     </h1>
                 </div>
@@ -156,7 +153,7 @@ const MainPage = () => {
                                 fontWeight:"800",
                                 borderRadius:"4px",
                                 border: "1px",
-                                background:"#60de5e",
+                                background:"#6DFF6A",
                                 color:"#303030",
                                 width: "268px",
                                 height:"48px",
@@ -169,8 +166,8 @@ const MainPage = () => {
                 </Row>
             </Card>
                         
-             {/* Блок для учебного заведения */}
-             <Card className="registration_for_enterprises" style={{ 
+             {/* Блок для организация */}
+             <Card className="registration_for_enterprises .for_enterprises" style={{ 
                 margin: "50px 0", 
                 }}>
                 <Row
@@ -231,7 +228,7 @@ const MainPage = () => {
                                 fontWeight:"800",
                                 borderRadius:"4px",
                                 border: "1px",
-                                background:"#60de5e",
+                                background:"#6DFF6A",
                                 color:"#303030",
                                 width: "268px",
                                 height:"48px",

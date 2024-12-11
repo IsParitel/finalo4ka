@@ -97,159 +97,198 @@ const ProfilePage = () => {
     if (!profile) {
         return (
             <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-                Профиль не найден.
+                Профиль не найден
             </div>
         );
     }
 
-    const { familia, imya } = profile.user;
+    const { familia, imya, gorod } = profile.user;
 
     return (
-        <Container className="mt-5">
+        <Container>
             {/* Верхняя часть профиля */}
-            <Row className="justify-content-center mb-4">
-                <Col md={4}>
-                    <Card
-                        style={{
-                            borderRadius: "15px",
-                            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                        }}
-                    >
-                        <Card.Body className="d-flex flex-column align-items-center">
+            <Row>
+                <Col style={{
+                    marginTop:"120px",
+                    }}>
+                        <Card
+                            style={{
+                                width:"267px",
+                                height:"341px",
+                                border:"none",
+                                borderRadius: "15px",
+                                boxShadow: "0 15px 15px #66666615",
+                            }}
+                        >
                             <Image
                                 src={profile.user.avatar ? `${process.env.REACT_APP_API_URL}/${profile.user.avatar}` : blankImage}
-                                roundedCircle
                                 style={{
-                                    width: "150px",
-                                    height: "150px",
-                                    border: "4px solid #6c757d",
+                                    width: "221px",
+                                    height: "221px",
+                                    margin:"23px",
+                                    border: "1px solid #6c757d",
+                                    borderRadius:"15px",
                                     objectFit: "cover",
                                     marginBottom: "15px",
                                 }}
                                 alt="Аватар пользователя"
                             />
-                            <Card.Title style={{ fontSize: "20px", fontWeight: "bold" }}>
-                                {imya} {familia}
-                            </Card.Title>
-                        </Card.Body>
-                    </Card>
+                            <p 
+                               style={{
+                                   margin:"0 23px",
+                                   fontFamily:"Kumbh Sans",
+                                   fontSize:"20px",
+                                   fontWeight:"700",
+                               }}>
+                                {`${imya} ${familia}`}
+                            </p>
+                            <p
+                                style={{
+                                   margin:"0 23px",
+                                   fontFamily:"Kumbh Sans",
+                                   fontSize:"12px",
+                                   fontWeight:"600",
+                                   color:"#666",
+                               }}>
+                                 {`${gorod}`}</p>
+                        </Card>
                 </Col>
-                <Col md={6}>
+
+                <Col 
+                    style={{
+                        marginTop:"120px"}}
+                >
                     <Card
                         style={{
-                            height: "100%",
-                            borderRadius: "15px",
-                            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                            width:"997px",
+                            paddingLeft:"40px",
+                            paddingTop:"30px",
+                            paddingBottom:"54px",
+                            borderRadius: "26px",
+                            border:"none",
+                            boxShadow: "0 15px 15px #66666615",
                         }}
                     >
-                        <Card.Body>
-                            <Card.Text style={{ color: "#6c757d" }}>
-                                Добро пожаловать, {imya}. Здесь вы можете управлять своими вакансиями и следить за их статусом.
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-
-            {/* Список вакансий, на которые откликнулся пользователь */}
-            {(user.role === "ADMIN" || user.role === "USER") && (
-                <Row className="mt-4">
-                    <Col>
-                        <h4>Ваши отклики:</h4>
-                        {jobPages.length > 0 ? (
-                            jobPages.map((job, index) => (
-                                <Card key={index} className="mb-3 shadow-sm">
-                                    <Card.Body className="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <Card.Title>{job.name}</Card.Title>
-                                            <Card.Text>{job.description}</Card.Text>
-                                            <Image
-                                                src={process.env.REACT_APP_API_URL + job.img}
-                                                alt={job.name}
-                                                style={{
-                                                    width: "100%",
-                                                    height: "200px",
-                                                    objectFit: "cover",
-                                                }}
-                                            />
-                                        </div>
-                                        <Button
-                                            variant="danger"
-                                            onClick={() => handleRevokeJob(job.id)}
-                                        >
-                                            Отозвать заявление
-                                        </Button>
-                                    </Card.Body>
-                                </Card>
-                            ))
-                        ) : (
-                            <p style={{ textShadow: "2px 2px 5px rgba(0,0,0,0.7)", fontSize: "2rem" }}>
-                                У вас пока нет откликов.
+                            <p 
+                               style={{
+                                   fontFamily:"Kumbh Sans",
+                                   fontSize:"20px",
+                                   fontWeight:"700",
+                               }}>
+                                Проверка
                             </p>
+                        {/* Список вакансий, на которые откликнулся пользователь */}
+            
+                        {(user.role === "ADMIN" || user.role === "USER") && (
+                            <Row>
+                                <Col>
+                                    <h4 style={{
+                                        fontFamily:"Kumbh Sans",
+                                        fontSize:"20px",
+                                        fontWeight:"700",
+                                    }}>
+                                        Ваши отклики
+                                    </h4>
+                                    {jobPages.length > 0 ? (
+                                        jobPages.map((job, index) => (
+                                            <Card key={index} className="mb-3 shadow-sm">
+                                                <Card.Body className="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <Card.Title>{job.name}</Card.Title>
+                                                        <Card.Text>{job.description}</Card.Text>
+                                                        <Image
+                                                            src={process.env.REACT_APP_API_URL + job.img}
+                                                            alt={job.name}
+                                                            style={{
+                                                                width: "100%",
+                                                                height: "200px",
+                                                                objectFit: "cover",
+                                                            }}
+                                                        />
+                                                    </div>
+                                                    <Button
+                                                        variant="danger"
+                                                        onClick={() => handleRevokeJob(job.id)}
+                                                    >
+                                                        Отозвать заявление
+                                                    </Button>
+                                                </Card.Body>
+                                            </Card>
+                                        ))
+                                    ) : (
+                                        <p style={{
+                                            fontFamily:"Kumbh Sans",
+                                            fontSize:"20px",
+                                            fontWeight:"700",
+                                        }}>
+                                            У вас пока нет откликов
+                                        </p>
+                                    )}
+                                </Col>
+                            </Row>
                         )}
-                    </Col>
-                </Row>
-            )}
 
-            {/* Созданные вакансии */}
-            {(user.role === "ADMIN" || user.role === "RABOTA") && (
-                <Row className="mt-4">
-                    <Col>
-                        {createdJobs.length > 0 ? (
-                            <div>
-                                <h4>Созданные вакансии:</h4>
-                                {createdJobs.map((job, index) => (
-                                    <Card key={index} className="mb-3 shadow-sm">
-                                        <Card.Body className="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <Card.Title>{job.name}</Card.Title>
-                                                <Card.Text>{job.description}</Card.Text>
-                                                <Image
-                                                    src={process.env.REACT_APP_API_URL + job.img}
-                                                    alt={job.name}
-                                                    style={{
-                                                        width: "100%",
-                                                        height: "200px",
-                                                        objectFit: "cover",
-                                                    }}
-                                                />
-                                            </div>
-                                            {(user.role === "ADMIN" || user.role === "USER") && (
-                                                <Button variant="danger" onClick={() => handleDeleteJob(job.id)}>
-                                                    Удалить вакансию
-                                                </Button>
-                                            )}
-                                        </Card.Body>
-                                    </Card>
-                                ))}
-                            </div>
-                        ) : (
-                            <p>Вы еще не создали вакансии.</p>
+                        {/* Созданные вакансии */}
+                        {(user.role === "ADMIN" || user.role === "RABOTA") && (
+                            <Row className="mt-4">
+                                <Col>
+                                    {createdJobs.length > 0 ? (
+                                        <div>
+                                            <h4>Созданные вакансии:</h4>
+                                            {createdJobs.map((job, index) => (
+                                                <Card key={index} className="mb-3 shadow-sm">
+                                                    <Card.Body className="d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <Card.Title>{job.name}</Card.Title>
+                                                            <Card.Text>{job.description}</Card.Text>
+                                                            <Image
+                                                                src={process.env.REACT_APP_API_URL + job.img}
+                                                                alt={job.name}
+                                                                style={{
+                                                                    width: "100%",
+                                                                    height: "200px",
+                                                                    objectFit: "cover",
+                                                                }}
+                                                            />
+                                                        </div>
+                                                        {(user.role === "ADMIN" || user.role === "USER") && (
+                                                            <Button variant="danger" onClick={() => handleDeleteJob(job.id)}>
+                                                                Удалить вакансию
+                                                            </Button>
+                                                        )}
+                                                    </Card.Body>
+                                                </Card>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p>Вы еще не создали вакансии.</p>
+                                    )}
+                                </Col>
+                            </Row>
                         )}
-                    </Col>
-                </Row>
-            )}
 
-            <Row>
-                <Col>
-                    <Button
-                        size="lg"
-                        style={{
-                            transform: "translate(160%, 100%)",
-                            padding: "15px 30px",
-                            fontSize: "1.2rem",
-                            fontWeight: "bold",
-                            borderRadius: "30px",
-                            background: "rgba(255, 255, 255, 0.8)",
-                            backgroundSize: "cover",
-                            color: "black",
-                            border: "2px solid white",
-                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.4)",
-                        }}
-                        onClick={() => navigate(JOB_LIST_ROUTE)} // Исправленный navigate
-                    >
-                        Найти СВОю стажироVку
-                    </Button>
+                        <Row>
+                            <Col>
+                                <Button
+                                    size="lg"
+                                    style={{
+                                        padding: "15px 30px",
+                                        fontSize: "15px",
+                                        fontWeight: "700",
+                                        borderRadius: "6px",
+                                        background: "#6DFF6A",
+                                        backgroundSize: "cover",
+                                        color: "#303030",
+                                        border:"none",
+                                        boxShadow: "0px 9px 15px #66666615",
+                                    }}
+                                    onClick={() => navigate(JOB_LIST_ROUTE)} // Исправленный navigate
+                                >
+                                    Найти свою стажировку!
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Card>
                 </Col>
             </Row>
         </Container>

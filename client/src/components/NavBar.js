@@ -8,6 +8,7 @@ import { ThemeContext } from "../index";
 import LightLogo from '../assets/SkillHorizon.png'; // Светлая тема (на тёмном фоне)
 import DarkLogo from '../assets/SkillHorizon_black.png'; // Тёмная тема (на светлом фоне)
 import DarkAccount from '../assets/account_black.svg'; // Тёмная тема (на светлом фоне)
+import Exit from '../assets/exit.svg';
 
 const NavBar = observer(() => {
     const { user } = useContext(Context);
@@ -46,20 +47,13 @@ const NavBar = observer(() => {
                             src={theme === 'theme-light' ? LightLogo : DarkLogo} // Переключение логотипа
                             alt="logo"
                             style={{
-                                margin: "25px",
-                                width: "150px", // Пример размеров
-                                height: "auto"
+                                marginLeft: "25px",
                             }}
                         />
                     </NavLink>
                     <Navbar.Toggle aria-controls="navbar-nav" />
                     <Navbar.Collapse id="navbar-nav">
-                        <Nav className="ms-auto d-flex align-items-center" style={{ gap: "10px" }}>
-                            {!user.isAuth && (
-                                <Button variant="outline-light" onClick={() => navigate(LOGIN_ROUTE)}>
-                                    Авторизация
-                                </Button>
-                            )}
+                        <Nav className="ms-auto d-flex align-items-center" style={{ gap: "15px" }}>
                             {isAdmin && (
                                 <Button variant="outline-light" onClick={() => navigate(ADMIN_ROUTE)}>
                                     Админ панель
@@ -70,19 +64,6 @@ const NavBar = observer(() => {
                                     Добавить вакансию
                                 </Button>
                             )}
-                            {user.isAuth && (
-                                <>
-                                    <Button variant="outline-light" onClick={() => navigate(PROFILE_ROUTE)} className="account">
-                                        <img
-                                            src={DarkAccount}
-                                            alt="Account"
-                                        />
-                                    </Button>
-                                    <Button variant="outline-light" onClick={logOut}>
-                                        Выйти
-                                    </Button>
-                                </>
-                            )}
                             {/* Кнопка для смены темы */}
                             <Button
                                 variant="outline-light"
@@ -90,6 +71,27 @@ const NavBar = observer(() => {
                             >
                                 {theme === "theme-light" ? "Тёмная тема" : "Светлая тема"}
                             </Button>
+                            {!user.isAuth && (
+                                <Button variant="outline-light" onClick={() => navigate(LOGIN_ROUTE)}>
+                                    Авторизация
+                                </Button>
+                            )}
+                            {user.isAuth && (
+                                <>
+                                    <div variant="outline-light" onClick={() => navigate(PROFILE_ROUTE)} className="account">
+                                        <img
+                                            src={DarkAccount}
+                                            alt="Account"
+                                        />
+                                    </div>
+                                    <div variant="outline-light" onClick={logOut} className="account">
+                                        <img
+                                            src={Exit}
+                                            alt="Exit"
+                                        />
+                                    </div>
+                                </>
+                            )}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
