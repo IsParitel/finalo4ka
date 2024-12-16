@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../index";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import { ADMIN_ROUTE, LOGIN_ROUTE, MAIN_PAGE_ROUTE, PROFILE_ROUTE, ADD_JOB_ROUTE } from "../utils/consts";
+import { ADMIN_ROUTE, LOGIN_ROUTE, MAIN_PAGE_ROUTE, PROFILE_ROUTE, ADD_JOB_ROUTE, JOB_LIST_ROUTE} from "../utils/consts";
 import { observer } from "mobx-react-lite";
 import { ThemeContext } from "../index";
 import LightLogo from '../assets/SkillHorizon.png'; // Светлая тема (на тёмном фоне)
@@ -54,6 +54,11 @@ const NavBar = observer(() => {
                     <Navbar.Toggle aria-controls="navbar-nav" />
                     <Navbar.Collapse id="navbar-nav">
                         <Nav className="ms-auto d-flex align-items-center" style={{ gap: "15px" }}>
+                            {user.isAuth && (
+                                <Button variant="outline-light" onClick={() => navigate(JOB_LIST_ROUTE)}>
+                                    Найти стажировку
+                                </Button>
+                            )}
                             {isAdmin && (
                                 <Button variant="outline-light" onClick={() => navigate(ADMIN_ROUTE)}>
                                     Админ панель

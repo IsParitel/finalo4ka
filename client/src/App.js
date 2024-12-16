@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { observer } from "mobx-react";
 import { useContext, useEffect, useState } from "react";
@@ -39,6 +40,7 @@ const App = observer(() => {
             <div className={theme}> {/* Применяем текущую тему ко всем компонентам */}
                 <NavBar />
                 <AppRouter />
+                <Footer />
             </div>
         </BrowserRouter>
     );

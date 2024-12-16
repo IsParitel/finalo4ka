@@ -126,7 +126,6 @@ const ProfilePage = () => {
                                     width: "221px",
                                     height: "221px",
                                     margin:"23px",
-                                    border: "1px solid #6c757d",
                                     borderRadius:"15px",
                                     objectFit: "cover",
                                     marginBottom: "15px",
