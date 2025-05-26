@@ -40,21 +40,21 @@ const JobList = observer(() => {
 
     return (
         <Container>
-            <Row className="mt-2">
+            <Row style={{ paddingTop: '120px' }}>
                 {/* Левая колонка с фильтрами */}
-                <Col md={3}>
+                <Col>
                     <FilterBar />
                 </Col>
 
                 {/* Основной контент */}
-                <Col md={6}>
-                    <Row className="d-flex flex-column">
+                <Col>
+                    <Row>
                         <JobListing />
                     </Row>
                 </Col>
 
                 {/* Правая колонка с рекомендациями */}
-                <Col md={3}>
+                <Col>
                     <Card
                         style={{
                             padding: '15px',
