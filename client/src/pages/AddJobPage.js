@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Button, Card, Dropdown, Form} from "react-bootstrap";
+import {Container,Button, Card, Dropdown, Form} from "react-bootstrap";
 import { createJob_page, fetchOtrasls, fetchSpecials } from "../http/job_pageAPI";
 import { useNavigate } from "react-router-dom";
 import {MAIN_PAGE_ROUTE} from "../utils/consts"; // Используем useNavigate для перенаправления
@@ -64,84 +64,90 @@ const CreateJobPage = () => {
     };
 
     return (
+        <Container>
+            <div
+                style={{
+                        margin: '0 auto',
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}>
+                <Card
+                    style={{
+                        marginTop: '150px',
+                        width: '900px',
+                        height: '800px',
+                    }}>
+                    <div style={{ padding: '20px' }}>
+                        <h3>Добавить вакансию</h3>
+                        <Form>
+                            {/* Выбор отрасли */}
+                            <Dropdown className="mt-2 mb-2">
+                                <Dropdown.Toggle>{selectedOtraslId ? `Отрасль: ${otrasls.find(o => o.id === selectedOtraslId)?.name}` : "Выберите отрасль"}</Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    {otrasls.map(otrasl => (
+                                        <Dropdown.Item
+                                            key={otrasl.id}
+                                            onClick={() => setSelectedOtraslId(otrasl.id)}
+                                        >
+                                            {otrasl.name}
+                                        </Dropdown.Item>
+                                    ))}
+                                </Dropdown.Menu>
+                            </Dropdown>
 
-        <Card
-            style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -43%)',
-                width: '900px',
-                height: '800px'
-            }}>
-        <div style={{ padding: '20px' }}>
-            <h3>Добавить вакансию</h3>
-            <Form>
-                {/* Выбор отрасли */}
-                <Dropdown className="mt-2 mb-2">
-                    <Dropdown.Toggle>{selectedOtraslId ? `Отрасль: ${otrasls.find(o => o.id === selectedOtraslId)?.name}` : "Выберите отрасль"}</Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        {otrasls.map(otrasl => (
-                            <Dropdown.Item
-                                key={otrasl.id}
-                                onClick={() => setSelectedOtraslId(otrasl.id)}
-                            >
-                                {otrasl.name}
-                            </Dropdown.Item>
-                        ))}
-                    </Dropdown.Menu>
-                </Dropdown>
+                            {/* Выбор специальности */}
+                            {selectedOtraslId && (
+                                <Dropdown className="mt-2 mb-2">
+                                    <Dropdown.Toggle>{selectedSpecialId ? `Специальность: ${specialties.find(s => s.id === selectedSpecialId)?.name}` : "Выберите специальность"}</Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        {specialties.map(special => (
+                                            <Dropdown.Item
+                                                key={special.id}
+                                                onClick={() => setSelectedSpecialId(special.id)}
+                                            >
+                                                {special.name}
+                                            </Dropdown.Item>
+                                        ))}
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            )}
 
-                {/* Выбор специальности */}
-                {selectedOtraslId && (
-                    <Dropdown className="mt-2 mb-2">
-                        <Dropdown.Toggle>{selectedSpecialId ? `Специальность: ${specialties.find(s => s.id === selectedSpecialId)?.name}` : "Выберите специальность"}</Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {specialties.map(special => (
-                                <Dropdown.Item
-                                    key={special.id}
-                                    onClick={() => setSelectedSpecialId(special.id)}
-                                >
-                                    {special.name}
-                                </Dropdown.Item>
-                            ))}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                )}
+                            {/* Поле для ввода названия стажировки */}
+                            <Form.Control
+                                className="mt-3"
+                                placeholder="Введите название стажировки"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
 
-                {/* Поле для ввода названия стажировки */}
-                <Form.Control
-                    className="mt-3"
-                    placeholder="Введите название стажировки"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
+                            {/* Поле для загрузки файла */}
+                            <Form.Control
+                                className="mt-3"
+                                type="file"
+                                onChange={selectFile}
+                            />
 
-                {/* Поле для загрузки файла */}
-                <Form.Control
-                    className="mt-3"
-                    type="file"
-                    onChange={selectFile}
-                />
+                            {/* Поле для описания */}
+                            <Form.Group controlId="formDescription" className="mt-4">
+                                <Form.Label>Описание вакансии</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={17}
+                                    placeholder="Введите подробное описание вакансии"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                />
+                            </Form.Group>
+                        </Form>
 
-                {/* Поле для описания */}
-                <Form.Group controlId="formDescription" className="mt-4">
-                    <Form.Label>Описание вакансии</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows={17}
-                        placeholder="Введите подробное описание вакансии"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </Form.Group>
-            </Form>
-
-            <Button variant="primary" onClick={addJobPage} className="mt-3">
-                Добавить
-            </Button>
-        </div>
-        </Card>
+                        <Button variant="primary" onClick={addJobPage} className="mt-3">
+                            Добавить
+                        </Button>
+                    </div>
+                </Card>
+            </div>
+        </Container>
     );
 };
 
