@@ -41,10 +41,6 @@ const JobList = observer(() => {
     return (
         <Container>
             <Row style={{ paddingTop: '120px' }}>
-                {/* Левая колонка с фильтрами */}
-                <Col>
-                    <FilterBar />
-                </Col>
 
                 {/* Основной контент */}
                 <Col>
@@ -53,6 +49,12 @@ const JobList = observer(() => {
                     </Row>
                 </Col>
 
+                {/* Левая колонка с фильтрами */}
+                <Col>
+                    <FilterBar />
+                </Col>
+            </Row>
+            <Row>
                 {/* Правая колонка с рекомендациями */}
                 <Col>
                     <Card

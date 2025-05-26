@@ -58,8 +58,7 @@ const JobPage = () => {
                                 borderRadius: "26px",
                                 boxShadow: "0 15px 15px #66666615",
                                 margin: "0 auto",
-                                padding: "24px",
-                                fontFamily: "Kumbh Sans",
+                                padding: "24px"
                             }}
                         >
                             <Image

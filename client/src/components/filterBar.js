@@ -7,115 +7,141 @@ import { fetchOtrasls, fetchSpecials } from "../http/job_pageAPI";
 const FilterBar = observer(() => {
     const { job_page } = useContext(Context);
     const [expandedOtraslId, setExpandedOtraslId] = useState(null);
-    const [selectedSpecial, setSelectedSpecial] = useState(null);
+    const [selectedSpecials, setSelectedSpecials] = useState([]);
     const [otrasls, setOtrasls] = useState([]);
-    const [specialties, setSpecialties] = useState([]);
-    const [filteredSpecialties, setFilteredSpecialties] = useState([]);
+    const [allSpecialties, setAllSpecialties] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        fetchOtrasls().then(setOtrasls);
+        fetchOtrasls().then(async (otraslData) => {
+            setOtrasls(otraslData);
+
+            const allSpecs = [];
+            for (const o of otraslData) {
+                const specs = await fetchSpecials(o.id);
+                allSpecs.push(...specs.map(s => ({ ...s, otraslId: o.id })));
+            }
+            setAllSpecialties(allSpecs);
+        });
     }, []);
 
-    useEffect(() => {
-        if (expandedOtraslId) {
-            fetchSpecials(expandedOtraslId).then((data) => {
-                setSpecialties(data);
-                setFilteredSpecialties(data);
-            });
-        }
-    }, [expandedOtraslId]);
-
     const handleOtraslClick = (otrasl) => {
-        if (expandedOtraslId === otrasl.id) {
-            setExpandedOtraslId(null);
-        } else {
-            setExpandedOtraslId(otrasl.id);
-        }
-        job_page.setSelectedOtrasl(otrasl);
+        setExpandedOtraslId(prev => (prev === otrasl.id ? null : otrasl.id));
     };
 
     const handleSpecialClick = (special) => {
-        const newSpecial = special.id === selectedSpecial?.id ? null : special;
-        setSelectedSpecial(newSpecial);
-        job_page.setSelectedSpecial(newSpecial);
+        const alreadySelected = selectedSpecials.some(s => s.id === special.id);
+        const updated = alreadySelected
+            ? selectedSpecials.filter(s => s.id !== special.id)
+            : [...selectedSpecials, special];
+
+        setSelectedSpecials(updated);
+        job_page.setSelectedSpecial(updated);
     };
 
     const resetFilters = () => {
-        setSelectedSpecial(null);
+        setSelectedSpecials([]);
         job_page.clearFilters();
     };
 
-    const filterSpecialties = (searchTerm) => {
-        const filtered = specialties.filter((special) =>
-            special.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredBySearch = (otraslId) => {
+        return allSpecialties.filter(s =>
+            s.otraslId === otraslId &&
+            s.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
-        setFilteredSpecialties(filtered);
     };
 
     return (
         <Card
             style={{
+                width: '351px',
                 padding: '20px',
                 borderRadius: '15px',
                 border: 'none',
                 boxShadow: '0 15px 15px #66666615',
-                fontFamily: 'Kumbh Sans',
+                backgroundColor: '#fff'
             }}
         >
             <h5 style={{ fontWeight: '700', fontSize: '18px', marginBottom: '15px' }}>Фильтры по отраслям</h5>
-            <ListGroup variant="flush">
-                {otrasls.map((otrasl) => (
-                    <div key={otrasl.id}>
-                        <ListGroup.Item
-                            onClick={() => handleOtraslClick(otrasl)}
-                            active={job_page.selectedOtrasl?.id === otrasl.id}
-                            style={{
-                                cursor: 'pointer',
-                                fontWeight: '600',
-                                fontSize: '15px',
-                                backgroundColor: 'transparent',
-                                border: 'none',
-                                padding: '10px 0',
-                                color: '#303030',
-                            }}
-                        >
-                            {otrasl.name}
-                        </ListGroup.Item>
 
-                        {expandedOtraslId === otrasl.id && (
-                            <div style={{ paddingLeft: '15px', transition: 'all 0.3s ease' }}>
-                                <FormControl
-                                    placeholder="Поиск специализации"
-                                    onChange={(e) => filterSpecialties(e.target.value)}
+            <FormControl
+                placeholder="Поиск по всем специализациям"
+                onChange={(e) => setSearchTerm(e.target.value)}
+                style={{
+                    marginBottom: '15px',
+                    fontSize: '13px',
+                    borderRadius: '10px',
+                    border: '1px solid #ccc',
+                }}
+            />
+
+            <ListGroup style={{ border: 'none' }} variant="flush">
+                {otrasls.map((otrasl) => {
+                    const isExpanded = expandedOtraslId === otrasl.id;
+                    const specialties = filteredBySearch(otrasl.id);
+
+                    return (
+                        <div key={otrasl.id} style={{ backgroundColor: '#fff', borderRadius: '10px', marginBottom: '5px' }}>
+                            <div
+                                onClick={() => handleOtraslClick(otrasl)}
+                                style={{
+                                    cursor: 'pointer',
+                                    fontWeight: '600',
+                                    fontSize: '15px',
+                                    padding: '10px 12px',
+                                    color: '#303030',
+                                    backgroundColor: '#fff',
+                                    border: 'none',
+                                }}
+                            >
+                                <span
                                     style={{
-                                        marginBottom: '10px',
-                                        fontSize: '13px',
-                                        borderRadius: '10px',
-                                        border: '1px solid #ccc',
+                                        transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+                                        transition: 'transform 0.2s ease',
+                                        marginRight: '6px',
+                                        display: 'inline-block',
                                     }}
-                                />
-                                {filteredSpecialties.map((special) => (
-                                    <ListGroup.Item
-                                        key={special.id}
-                                        onClick={() => handleSpecialClick(special)}
-                                        active={selectedSpecial?.id === special.id}
-                                        style={{
-                                            cursor: 'pointer',
-                                            paddingLeft: '20px',
-                                            backgroundColor: 'transparent',
-                                            border: 'none',
-                                            fontSize: '14px',
-                                            fontWeight: selectedSpecial?.id === special.id ? '700' : '400',
-                                            color: selectedSpecial?.id === special.id ? '#007bff' : '#666',
-                                        }}
-                                    >
-                                        {special.name}
-                                    </ListGroup.Item>
-                                ))}
+                                >
+                                    &gt;
+                                </span>
+                                {otrasl.name}
                             </div>
-                        )}
-                    </div>
-                ))}
+
+                            <div
+                                style={{
+                                    maxHeight: isExpanded ? 1000 : 0,
+                                    overflow: 'hidden',
+                                    transition: 'max-height 0.3s ease',
+                                    paddingLeft: '20px',
+                                    backgroundColor: '#fff'
+                                }}
+                            >
+                                {isExpanded && specialties.map((special) => {
+                                    const isSelected = selectedSpecials.some(s => s.id === special.id);
+                                    return (
+                                        <ListGroup.Item
+                                            key={special.id}
+                                            onClick={() => handleSpecialClick(special)}
+                                            style={{
+                                                cursor: 'pointer',
+                                                paddingLeft: '10px',
+                                                backgroundColor: isSelected ? '#e6f0ff' : '#fff',
+                                                border: 'none',
+                                                fontSize: '14px',
+                                                fontWeight: isSelected ? '700' : '400',
+                                                color: isSelected ? '#007bff' : '#666',
+                                                borderRadius: '5px',
+                                                marginBottom: '3px'
+                                            }}
+                                        >
+                                            {special.name}
+                                        </ListGroup.Item>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    );
+                })}
             </ListGroup>
 
             <Button
