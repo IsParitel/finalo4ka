@@ -6,7 +6,7 @@ import { fetchOtrasls, fetchSpecials } from "../http/job_pageAPI";
 
 const FilterBar = observer(() => {
     const { job_page } = useContext(Context);
-    const [expandedOtraslId, setExpandedOtraslId] = useState(null);
+    const [expandedOtraslIds, setExpandedOtraslIds] = useState([]);
     const [selectedSpecials, setSelectedSpecials] = useState([]);
     const [otrasls, setOtrasls] = useState([]);
     const [allSpecialties, setAllSpecialties] = useState([]);
@@ -25,9 +25,14 @@ const FilterBar = observer(() => {
         });
     }, []);
 
-    const handleOtraslClick = (otrasl) => {
-        setExpandedOtraslId(prev => (prev === otrasl.id ? null : otrasl.id));
-    };
+const handleOtraslClick = (otrasl) => {
+    if (expandedOtraslIds.includes(otrasl.id)) {
+        setExpandedOtraslIds(expandedOtraslIds.filter(id => id !== otrasl.id));
+    } else {
+        setExpandedOtraslIds([...expandedOtraslIds, otrasl.id]);
+    }
+    job_page.setSelectedOtrasl(otrasl);
+};
 
     const handleSpecialClick = (special) => {
         const alreadySelected = selectedSpecials.some(s => s.id === special.id);
@@ -77,7 +82,7 @@ const FilterBar = observer(() => {
 
             <ListGroup style={{ border: 'none' }} variant="flush">
                 {otrasls.map((otrasl) => {
-                    const isExpanded = expandedOtraslId === otrasl.id;
+                    const isExpanded = expandedOtraslIds.includes(otrasl.id);
                     const specialties = filteredBySearch(otrasl.id);
 
                     return (
