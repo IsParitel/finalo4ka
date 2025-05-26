@@ -49,7 +49,7 @@ const MainPage = () => {
                     <h1
                         style={{
                             fontSize: "64px",
-                            fontFamily: "Kumbh Sans",
+                            fontFamily: '"Kumbh Sans", sans-serif',
                             fontWeight: "900",
                             marginTop:"-100px",
                         }}
@@ -149,8 +149,8 @@ const MainPage = () => {
                                 <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
                             </Form.Group>
                             <Button type="submit" variant="success" style={{
-                                fontFamily:"Kumbh Sans",
                                 fontWeight:"800",
+                                border:'none',
                                 borderRadius:"6px",
                                 background:"#6DFF6A",
                                 color:"#303030",
@@ -223,7 +223,7 @@ const MainPage = () => {
                                 <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
                             </Form.Group>
                             <Button type="submit" variant="success" style={{
-                                fontFamily:"Kumbh Sans",
+                                border:'none',
                                 fontWeight:"800",
                                 borderRadius:"6px",
                                 background:"#6DFF6A",
