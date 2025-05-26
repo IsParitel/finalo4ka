@@ -42,59 +42,111 @@ const JobPage = () => {
     };
 
     return (
-        <Container className="mt-5"> {/* Убрали класс theme-dark */}
-            <Row className="justify-content-center">
-                <Col md={8}>
-                    <Card className="shadow-lg rounded" style={{ border: 'none' }}>
-                        <Row>
-                            <Col md={4} className="d-flex justify-content-center align-items-center">
-                                <Image
-                                    width={300}
-                                    height={300}
-                                    src={job_page.img ? process.env.REACT_APP_API_URL + job_page.img : '/path/to/placeholder.jpg'}
-                                    alt={job_page.name}
-                                    className="rounded-circle border"
-                                />
-                            </Col>
-                            <Col md={8}>
-                                <Card.Body>
-                                    <h2 className="font-weight-bold text-center mb-3" style={{ fontSize: '2rem' }}>
-                                        {job_page.name}
-                                    </h2>
-                                    <Button
-                                        variant="primary"
-                                        className="w-100 py-2"
-                                        onClick={handleApply}
-                                        disabled={applying}
-                                        style={{
-                                            backgroundColor: '#007bff',
-                                            borderColor: '#007bff',
-                                            borderRadius: '25px',
-                                            fontSize: '1.1rem',
-                                        }}
-                                    >
-                                        {applying ? 'Ожидание...' : 'Откликнуться'}
-                                    </Button>
-                                </Card.Body>
-                            </Col>
-                        </Row>
-                    </Card>
-                </Col>
-            </Row>
-            <Row className="mt-4">
-                <Col md={12}>
-                    <Card className="shadow-sm">
-                        <Card.Body>
-                            <h4 className="font-weight-bold mb-3">Описание вакансии:</h4>
-                            <Row>
-                                <Col>
-                                    <p>{job_page.description}</p>
-                                </Col>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
+        <Container>
+            <Row>
+                <Col style={{
+                    marginTop: "120px"
+                    }}>
+                        <Card
+                            style={{
+                                display: 'flex',          
+                                flexDirection: 'column',  
+                                justifyContent: 'space-between',
+                                width: "268px",
+                                height: "473px",
+                                border: "none",
+                                borderRadius: "26px",
+                                boxShadow: "0 15px 15px #66666615",
+                                margin: "0 auto",
+                                padding: "24px",
+                                fontFamily: "Kumbh Sans",
+                            }}
+                        >
+                            <Image
+                                src={job_page.img ? process.env.REACT_APP_API_URL + job_page.img : '/path/to/placeholder.jpg'}
+                                alt={job_page.name}
+                                style={{
+                                    width: "221px",
+                                    height: "221px",
+                                    borderRadius: "15px",
+                                    objectFit: "cover",
+                                    marginBottom: "15px",
+                                }}
+                            />
+                            <p style={{
+                                fontFamily: "Kumbh Sans",
+                                fontWeight:"600",
+                                fontSize: "20px",
+                                fontWeight: "700",
+                            }}>
+                                {job_page.name}
+                            </p>
+                            <p style={{
+                                fontFamily: "Kumbh Sans",
+                                fontSize: "12px",
+                                fontWeight: "600",
+                                color: "#666",
+                            }}>
+                                {job_page.city || 'Город не указан'}
+                            </p>
+                            <Button
+                                variant="primary"
+                                onClick={handleApply}
+                                disabled={applying}
+                                style={{
+                                    displey:'flex',
+                                    backgroundColor: '#6DFF6A',
+                                    borderColor: '#6DFF6A',
+                                    color: '#303030',
+                                    fontFamily: "Kumbh Sans",
+                                    fontWeight: '900',
+                                    fontSize: '10px',
+                                    borderRadius: '6px',
+                                    boxShadow: '0px 9px 15px #66666615',
+                                    width:"185px",
+                                    height: "32px"
+                                }}
+                            >
+                                {applying ? 'Ожидание...' : 'Откликнуться'}
+                            </Button>
+                        </Card>
+                        </Col>
+
+                        {/* Правая колонка — описание + кнопка */}
+                        <Col
+                            style={{
+                                marginTop:"120px"}}
+                        >
+                            <Card
+                                style={{
+                                    border: 'none',
+                                    borderRadius: "26px",
+                                    boxShadow: "0 15px 15px #66666615",
+                                    width:"997px",
+                                    paddingLeft:"40px",
+                                    paddingTop:"30px",
+                                    paddingBottom:"54px",
+                                    borderRadius: "26px", // чтобы выровнять с левой частью
+                                }}
+                            >
+                                <h4 style={{
+                                    fontFamily: "Kumbh Sans",
+                                    fontSize: "20px",
+                                    fontWeight: "700",
+                                    marginBottom: "20px"
+                                }}>
+                                    Описание вакансии:
+                                </h4>
+                                <p style={{
+                                    fontFamily: "Kumbh Sans",
+                                    fontSize: "16px",
+                                    color: "#303030"
+                                }}>
+                                    {job_page.description}
+                                </p>
+                            </Card>
+                        </Col>
+                    </Row>
         </Container>
     );
 };
