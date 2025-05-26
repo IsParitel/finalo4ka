@@ -98,10 +98,17 @@ const Auth = observer(() => {
     return (
         <Container
             className="d-flex justify-content-center align-items-center"
-            style={{ height: '100vh' }}
+            style={{ height: '80vh' }}
         >
-            <Card style={{ width: 700 }} className="p-4">
-                <h2 className="m-auto">{isLogin ? 'Авторизация' : "Регистрация"}</h2>
+            <Card style={{ borderRadius:'26px', border: 'none', width: 700, boxShadow: '0px 4px 15px #66666615' }} className="p-4">
+                <h2 style={{
+                    fontFamily: 'Kumbh Sans, sans-serif',
+                    fontWeight: '900',
+                    fontSize: '26px',
+                    textAlign: 'center',
+                    border: 'none',
+                    padding: "10px"
+                }} className="m-auto">{isLogin ? 'Авторизация' : "Регистрация"}</h2>
                 <Form className="d-flex flex-column">
                     {!isLogin && (
                         <Row className="mt-3">
@@ -226,22 +233,34 @@ const Auth = observer(() => {
                         onChange={e => setPassword(e.target.value)}
                     />
 
-                    <Row className="d-flex justify-content-between mt-3 px-3">
+                    <Row style={{
+                        textAlign:'center'
+                    }} className="d-flex justify-content-between mt-3 px-3">
                         {isLogin ? (
                             <div>
-                                Нет аккаунта? <NavLink to={REGISTER_ROUTE}>Зарегистрироваться</NavLink>
+                                Нет аккаунта? <NavLink style={{color:'#3C893A'}} to={REGISTER_ROUTE}>Зарегистрироваться</NavLink>
                             </div>
                         ) : (
                             <div>
-                                Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Войти</NavLink>
+                                Есть аккаунт? <NavLink style={{color:'#3C893A'}} to={LOGIN_ROUTE}>Войти</NavLink>
                             </div>
                         )}
                     </Row>
 
                     <Button
                         variant="outline-success"
-                        className="mt-3 align-self-end"
+                        className="mt-3"
                         onClick={click}
+                        style={{
+                                fontFamily:"Kumbh Sans",
+                                fontWeight:"800",
+                                borderRadius:"12px",
+                                background:"#6DFF6A",
+                                color:"#303030",
+                                width: "100%",
+                                height:"48px",
+                                boxShadow:"0px 14px 14px #66666620",
+                                }}
                     >
                         {isLogin ? 'Войти' : 'Регистрация'}
                     </Button>

@@ -151,8 +151,7 @@ const MainPage = () => {
                             <Button type="submit" variant="success" style={{
                                 fontFamily:"Kumbh Sans",
                                 fontWeight:"800",
-                                borderRadius:"4px",
-                                border: "1px",
+                                borderRadius:"6px",
                                 background:"#6DFF6A",
                                 color:"#303030",
                                 width: "268px",
@@ -226,8 +225,7 @@ const MainPage = () => {
                             <Button type="submit" variant="success" style={{
                                 fontFamily:"Kumbh Sans",
                                 fontWeight:"800",
-                                borderRadius:"4px",
-                                border: "1px",
+                                borderRadius:"6px",
                                 background:"#6DFF6A",
                                 color:"#303030",
                                 width: "268px",

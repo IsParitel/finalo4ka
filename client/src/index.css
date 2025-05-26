@@ -226,8 +226,8 @@ div[style*="flex"] {
 
 .theme-light .form-control:focus {
     background-color: #ffffff; /* Белый фон при фокусе */
-    border-color: #007bff; /* Синий бордер при фокусе */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Тень при фокусе */
+    border-color: #6DFF6A; /* Синий бордер при фокусе */
+    box-shadow: 0 0 15px #6dff6a20; /* Тень при фокусе */
 }
 
 .theme-light .btn-file {
@@ -249,8 +249,8 @@ div[style*="flex"] {
 
 .theme-dark .form-control:focus {
     background-color: #555555; /* Немного светлее при фокусе */
-    border-color: #007bff; /* Синий бордер при фокусе */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Тень при фокусе */
+    border-color: #6DFF6A; /* Синий бордер при фокусе */
+    box-shadow: 0 0 15px #6dff6a20; /* Тень при фокусе */
 }
 
 .theme-dark .btn-file {
