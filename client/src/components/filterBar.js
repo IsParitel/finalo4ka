@@ -64,7 +64,6 @@ const handleOtraslClick = (otrasl) => {
                 borderRadius: '15px',
                 border: 'none',
                 boxShadow: '0 15px 15px #66666615',
-                backgroundColor: '#fff'
             }}
         >
             <h5 style={{ fontWeight: '700', fontSize: '18px', marginBottom: '15px' }}>Фильтры по отраслям</h5>
@@ -77,16 +76,16 @@ const handleOtraslClick = (otrasl) => {
                     fontSize: '13px',
                     borderRadius: '10px',
                     border: '1px solid #ccc',
-                }}
+                }} 
             />
 
-            <ListGroup style={{ border: 'none' }} variant="flush">
+            <ListGroup style={{ border: 'none' , backgroundColor: 'transparent' }} variant="flush">
                 {otrasls.map((otrasl) => {
                     const isExpanded = expandedOtraslIds.includes(otrasl.id);
                     const specialties = filteredBySearch(otrasl.id);
 
                     return (
-                        <div key={otrasl.id} style={{ backgroundColor: '#fff', borderRadius: '10px', marginBottom: '5px' }}>
+                        <div key={otrasl.id} style={{ borderRadius: '10px', marginBottom: '5px' }}>
                             <div
                                 onClick={() => handleOtraslClick(otrasl)}
                                 style={{
@@ -94,8 +93,6 @@ const handleOtraslClick = (otrasl) => {
                                     fontWeight: '600',
                                     fontSize: '15px',
                                     padding: '10px 12px',
-                                    color: '#303030',
-                                    backgroundColor: '#fff',
                                     border: 'none',
                                 }}
                             >
@@ -118,7 +115,7 @@ const handleOtraslClick = (otrasl) => {
                                     overflow: 'hidden',
                                     transition: 'max-height 0.3s ease',
                                     paddingLeft: '20px',
-                                    backgroundColor: '#fff'
+                                    
                                 }}
                             >
                                 {isExpanded && specialties.map((special) => {
@@ -130,11 +127,12 @@ const handleOtraslClick = (otrasl) => {
                                             style={{
                                                 cursor: 'pointer',
                                                 paddingLeft: '10px',
-                                                backgroundColor: isSelected ? '#e6f0ff' : '#fff',
+                                                marginRight: '20px',
+                                                backgroundColor: isSelected ? '#66666610' : 'transparent',
                                                 border: 'none',
                                                 fontSize: '14px',
                                                 fontWeight: isSelected ? '700' : '400',
-                                                color: isSelected ? '#007bff' : '#666',
+                                                color: isSelected ? '#666' : '#666',
                                                 borderRadius: '5px',
                                                 marginBottom: '3px'
                                             }}
