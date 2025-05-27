@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Col, Container, Row, Card } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import FilterBar from "../components/filterBar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import JobListing from "../components/Job_listing";
@@ -10,76 +10,95 @@ import { getUserDetails } from "../http/userAPI";
 import JobPageItem from "../components/Job_pageItem";
 
 const JobList = observer(() => {
-    const { job_page } = useContext(Context);
-    const [recommendedJobPages, setRecommendedJobPages] = useState([]);
+  const { job_page } = useContext(Context);
+  const [recommendedJobPages, setRecommendedJobPages] = useState([]);
+  const [jobCount, setJobCount] = useState(0);
 
-    useEffect(() => {
-        fetchOtrasls().then(data => job_page.setOtrasls(data));
-    }, []);
+  useEffect(() => {
+    fetchOtrasls().then(data => job_page.setOtrasls(data));
+  }, []);
 
-    useEffect(() => {
-        fetchJob_pages().then((data) => {
-            console.log('Fetched job pages:', data);
-            job_page.setJob_pages(data.rows);
+  useEffect(() => {
+    fetchJob_pages().then((data) => {
+      console.log('Fetched job pages:', data);
+      job_page.setJob_pages(data.rows);
+      setJobCount(data.count || data.rows.length); // Установка количества вакансий
 
-            // Фильтрация рекомендаций
-            try {
-                const { otraslId, specialId } = getUserDetails();
-                const filteredJobPages = data.rows.filter(job_page =>
-                    job_page.otraslId === otraslId && job_page.specialId === specialId
-                );
+      try {
+        const { otraslId, specialId } = getUserDetails();
+        const filteredJobPages = data.rows.filter(job_page =>
+          job_page.otraslId === otraslId && job_page.specialId === specialId
+        );
 
-                // Выборка трех случайных вакансий
-                const shuffled = filteredJobPages.sort(() => 0.5 - Math.random());
-                setRecommendedJobPages(shuffled.slice(0, 3));
-            } catch (error) {
-                console.error('Ошибка получения рекомендаций:', error.message);
-            }
-        });
-    }, []);
+        const shuffled = filteredJobPages.sort(() => 0.5 - Math.random());
+        setRecommendedJobPages(shuffled.slice(0, 3));
+      } catch (error) {
+        console.error('Ошибка получения рекомендаций:', error.message);
+      }
+    });
+  }, []);
 
-    return (
-        <Container>
-            <Row style={{ paddingTop: '120px' }}>
+  return (
+    <Container style={{ paddingTop: '120px' }}>
+      <Row style={{ gap: '30px' }}>
+        {/* Основной контент */}
+        <Col
+          style={{
+            maxWidth: '760px',
+            boxShadow: '0 15px 15px #66666615',
+            borderRadius: '26px',
+            padding: '45px',
+            backgroundColor: 'var(--card-bg)',
+            color: 'var(--text-color)',
+          }}
+        >
+          <h5 style={{ marginBottom: '10px', fontWeight: '900' }}>Стажировки</h5>
+          <p style={{ marginBottom: '25px', fontWeight: '500' }}>
+            Количество стажировок: {jobCount}
+          </p>
+          <JobListing />
+        </Col>
 
-                {/* Основной контент */}
-                <Col>
-                    <Row>
-                        <JobListing />
-                    </Row>
-                </Col>
+        {/* Фильтр справа */}
+        <Col
+          style={{
+            minWidth: '280px',
+            maxWidth: '320px',
+          }}
+        >
+          <FilterBar />
+        </Col>
+      </Row>
 
-                {/* Левая колонка с фильтрами */}
-                <Col>
-                    <FilterBar />
-                </Col>
-            </Row>
-            <Row>
-                {/* Правая колонка с рекомендациями */}
-                <Col>
-                    <Card
-                        style={{
-                            padding: '15px',
-                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                            borderRadius: '15px',
-                            background: 'rgba(255,255,255,0.1)',
-                            width: '500px',
-                            transition: 'height 0.3s ease',
-                        }}
-                    >
-                        <h5 style={{ textAlign: 'center', marginBottom: '15px' }}>Рекомендуемые вакансии</h5>
-                        {recommendedJobPages.length > 0 ? (
-                            recommendedJobPages.map(job_page => (
-                                <JobPageItem key={job_page.id} job_page={job_page} />
-                            ))
-                        ) : (
-                            <p style={{ textAlign: 'center' }}>Нет рекомендаций</p>
-                        )}
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
-    );
+      {/* Отступ между блоками */}
+      <div style={{ height: '20px' }} />
+
+      <Row>
+        {/* Рекомендации */}
+        <Col
+          style={{
+            maxWidth: '760px',
+            boxShadow: '0 15px 15px #66666615',
+            borderRadius: '26px',
+            padding: '45px',
+            backgroundColor: 'var(--card-bg)',
+            color: 'var(--text-color)',
+          }}
+        >
+          <h5 style={{ marginBottom: '25px', fontWeight: '900' }}>
+            Рекомендуемые вакансии
+          </h5>
+          {recommendedJobPages.length > 0 ? (
+            recommendedJobPages.map((job_page) => (
+              <JobPageItem key={job_page.id} job_page={job_page} />
+            ))
+          ) : (
+            <p style={{ textAlign: 'center' }}>Нет рекомендаций</p>
+          )}
+        </Col>
+      </Row>
+    </Container>
+  );
 });
 
 export default JobList;

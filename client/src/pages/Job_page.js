@@ -73,15 +73,15 @@ const JobPage = () => {
                                 }}
                             />
                             <p style={{
-                                fontFamily: "Kumbh Sans",
+                                
                                 fontWeight:"600",
                                 fontSize: "20px",
-                                fontWeight: "700",
+                                fontWeight: "700", 
                             }}>
                                 {job_page.name}
                             </p>
                             <p style={{
-                                fontFamily: "Kumbh Sans",
+                                
                                 fontSize: "12px",
                                 fontWeight: "600",
                                 color: "#666",
@@ -97,7 +97,7 @@ const JobPage = () => {
                                     backgroundColor: '#6DFF6A',
                                     borderColor: '#6DFF6A',
                                     color: '#303030',
-                                    fontFamily: "Kumbh Sans",
+                                    
                                     fontWeight: '900',
                                     fontSize: '10px',
                                     borderRadius: '6px',
@@ -129,7 +129,7 @@ const JobPage = () => {
                                 }}
                             >
                                 <h4 style={{
-                                    fontFamily: "Kumbh Sans",
+                                    
                                     fontSize: "20px",
                                     fontWeight: "700",
                                     marginBottom: "20px"
@@ -137,7 +137,7 @@ const JobPage = () => {
                                     Описание вакансии:
                                 </h4>
                                 <p style={{
-                                    fontFamily: "Kumbh Sans",
+                                    
                                     fontSize: "16px",
                                     color: "#303030"
                                 }}>
